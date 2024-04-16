@@ -1,6 +1,6 @@
-# Proyek-1-Tugas-5.2
+# Proyek-1-Kelompok-B4
 
-Ini adalah Repository untuk tugas Proyek 1 Tugas 5.2 untuk Kelompok B4 dengan anggota :
+Ini adalah Repository untuk tugas Proyek 1 untuk Kelompok B4 dengan anggota :
 
 1. Ahmad Fatan Haidar
 2. Daffa Muzhaffar Fakhrudin
