@@ -32,7 +32,8 @@ class MangaSpider(scrapy.Spider):
                 'title': mangas.css('a.hoverinfo_trigger.fs14.fw-b::text').get(),
                 'info': manga_info,
                 'date': date_info,
-                'members': members_info
+                'members': members_info,
+                'score' : mangas.css('span.text.on.score-label::text').get(),
             }
             
             # Stop parsing if count reaches 1000
