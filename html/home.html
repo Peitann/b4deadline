@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B4 Team Website</title>
+    <link rel="stylesheet" href="/style/home_style.css">
+    <style>
+        /* Tambahan CSS */
+        .logout-btn-container {
+            margin-left: auto;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    
+    <section id="welcome">
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1>Hi, <span>We are B4 Team,</span></h1>
+                    <h2>Welcome to our Website!</h2>
+                    <p>We are informatics engineering students from Bandung State Polytechnic, here is the homepage of the project for the group website assignment that we created.</p>
+                    <h3>Thank you for visiting!</h3>
+                    <button class="btn btn-warning" onclick="goToSection('project')">Project</button>
+                    <button class="btn btn-warning" onclick="goToSection('team')">Team</button>
+                </div>
+                <div class="col-md-6">
+                    <img src="/img/2.png">
+                </div>
+            </div>
+        </div>
+        
+    </section>
+
+    <section id="project" class="nav-link">
+        <div class="container">
+            <h2>Projects</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card shadow-lg">
+                        <img class="card-img-top" src="/img/money_tracking_web.PNG" alt="Card image cap">
+                        <div class="card-body">
+                          <p class="card-text">Money Tracking Website</p>
+                        </div>
+                    </div>
+                </div>
+                <a href="/html/index.html"><button class="btn btn-warning">Visit Money Tracking Website</button></a>
+                <div></div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img class="card-img-top" src="/img/1.png" alt="Card image cap">
+                        <div class="card-body">
+                          <p class="card-text">Data Scraping Website</p>
+                        </div>
+                    </div>
+                </div>
+                <div></div>
+                <a href="/html/scrapping.html"><button class="btn btn-warning">Visit Data Scraping Website</button></a>
+            </div>
+        </div>
+    </section>
+    
+    <section id="team" class="nav-link">
+        <h1>Let's meet our Team!</h1>
+        <h4>B4 Team</h4>
+        <h5>
+            <ul>Ahmad Fatan Haidar</ul>
+            <ul>Daffa Khairun</ul>
+            <ul>Muhammad Adhyaksa</ul>
+            <ul>Muhammad Rafli Fadhilah</ul>
+            <ul>Nesta Rizkia Saputra</ul>
+        </h5>
+    </section>
+    <script>
+        // Fungsi untuk menangani klik tombol
+        function goToSection(sectionId) {
+            // Dapatkan elemen dengan id yang sesuai
+            var section = document.getElementById(sectionId);
+            
+            // Lakukan scroll ke elemen yang sesuai dengan transisi smooth
+            section.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

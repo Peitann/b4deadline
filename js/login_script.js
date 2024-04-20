@@ -9,7 +9,7 @@ function loginSuccess() {
   // Perform login validation
   if (username === validUsername && password === validPassword) {
     // Redirect to the desired section upon successful login
-    window.location.href = "index.html#first";
+    window.location.href = "home.html";
     return false; // Prevent default form submission
   } else {
     // Display an alert for invalid credentials
