@@ -1,9 +1,8 @@
-# Proyek-1-Kelompok-B4
+# peitann-kelas-b
 
-Ini adalah Repository untuk tugas Proyek 1 untuk Kelompok B4 dengan anggota :
-
-1. Ahmad Fatan Haidar
-2. Daffa Muzhaffar Fakhrudin
-3. Muhammad Adhyaksa Fadillah
-4. Muhammad Rafli Fadhilah
-5. Nesta Rizkia Saputra 
+Username Github Anggota :
+1. Peitann (Ahmad Fatan Haidar)
+2. Daffakhruddin (Daffa Muzhaffar Fakhruddin)
+3. NeoNetz (Muhammad Adhyaksa Fadillah)
+4. RafliFadhilah (Muhammad Rafli Fadhilah)
+5. NestaRizkia (Nesta Rizkia Saputra)
