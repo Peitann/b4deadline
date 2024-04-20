@@ -29,6 +29,7 @@ class MangaSpider(scrapy.Spider):
     def parse_manga(self, response):
         synopsis = response.css('span[itemprop="description"]::text').get()
         genres = response.css('span[itemprop="genre"]::text').getall()
+        authors_and_artists = response.css('span.information.studio.author a::text').getall()
         yield {
             'rank': response.meta['rank'],
             'title': response.meta['title'],
@@ -39,8 +40,7 @@ class MangaSpider(scrapy.Spider):
             'members': response.meta['members'],
             'synopsis': synopsis,
             'manga_link': response.meta['manga_link'],
+            'authors_and_artists': authors_and_artists,
             'genres': genres,
         }
 #scrapy crawl manga-spider -o hasil.json
-
-
