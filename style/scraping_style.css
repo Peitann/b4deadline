@@ -1,0 +1,78 @@
+@import url('https://fonts.cdnfonts.com/css/google-sans');
+
+body {
+    font-family: 'Product Sans', sans-serif;
+    background-color: #bbb4b49f; /* Ganti sesuai preferensi Anda */
+}
+
+body h1 {
+    text-align: center;
+}
+
+#myTable_wrapper {
+    padding: 20px;
+    background-color: #ffffff; /* Warna latar belakang untuk wrapper tabel */
+}
+
+#myTable {
+    background-color: #ffffff; /* Warna latar belakang untuk tabel */
+    border-radius: 5px;
+}
+
+#myTable_filter label {
+    font-weight: bold;
+}
+
+#myTable_length label {
+    font-weight: bold;
+}
+
+#myTable_paginate .paginate_button {
+    padding: 5px;
+    margin: 0 2px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+}
+
+#myTable_paginate .paginate_button.current {
+    background-color: #007bff;
+    color: #fff;
+}
+
+#myTable_paginate .paginate_button:hover {
+    background-color: #ccc;
+    color: #333;
+}
+
+#myTable th,
+#myTable td {
+    padding: 10px;
+}
+
+#myTable th {
+    background-color: #007bff;
+    color: #fff;
+    text-align: left;
+}
+
+#myTable tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#myTable tbody tr:hover {
+    background-color: #ddd;
+}
+
+#myTable tbody td {
+    border-bottom: 1px solid #ccc;
+}
+
+#myTable tbody td:last-child {
+    border-bottom: none;
+}
+
+#myTable tbody img {
+    display: block;
+    margin: auto;
+}

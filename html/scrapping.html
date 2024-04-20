@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Scraping B4</title>
+    <link rel="stylesheet" type="text/css" href="https:///cdn.datatables.net/2.0.5/css/dataTables.dataTables.min.css">
+    <link rel="stylesheet" href="/style/scraping_style.css">
+</head>
+<body>
+    <h1>Web Scraping B4</h1>
+    <a href="myanimelist.net"><h1>myanimelist.net</h1></a>
+    <table id="myTable" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Title</th>
+                <th>Image</th>
+                <th>Score</th>
+                <th>Volume</th>
+                <th>Date</th>
+                <th>Members</th>
+                <th>Synopsis</th>
+                <th>Manga Link</th>
+                <th>Authors and Artists</th>
+                <th>Genres</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/2.0.5/js/dataTables.min.js"></script>
+    <script>
+        let table = new DataTable('#myTable');
+        $(document).ready(function() {
+            $.ajax({
+                url: 'hasil.json',
+                dataType: 'json',
+                success: function(data) {
+                    $('#myTable').DataTable({
+                        data: data,
+                        columns: [
+                            { data: 'rank' },
+                            { data: 'title' },
+                            {
+                                data: "image",
+                                render: function(data, type, row) {
+                                    return '<img src="' + data + '"alt="Image">';
+                                },
+                            },
+                            { data: 'score' },
+                            { data: 'volume' },
+                            { data: 'date' },
+                            { data: 'members' },
+                            { data: 'synopsis' },
+                            { data: 'manga_link' },
+                            { data: 'authors_and_artists' },
+                            { data: 'genres' },
+                        ]
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
