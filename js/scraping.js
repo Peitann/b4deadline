@@ -36,7 +36,7 @@ $(document).ready(function() {
     }
 
     function fetchData() {
-        $.getJSON("/manga/hasil.json", function(data) {
+        $.getJSON("./manga/hasil.json", function(data) {
             const startIndex = (page - 1) * itemsPerPage;
             const slicedData = data.slice(startIndex, startIndex + itemsPerPage);
             displayData(slicedData);
