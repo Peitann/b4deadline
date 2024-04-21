@@ -63,6 +63,163 @@
         padding: 5px;
         border-radius: 5px;
     }
+    /*=============== NAV BAR ===============*/
+
+.header{
+    position: fixed;
+    width: 100%;
+    background-color: var(--container-color);
+    top: 0;
+    left: 0;
+    z-index: var(--z-fixed);
+}
+
+.nav{
+    height: var(--header-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav__logo  {
+    color: var(--title-color);
+    font-weight: var(--font-medium);
+}
+
+.nav__logo span{
+    color: var(--first-color);
+}
+
+.nav__toggle,
+.nav__close{
+    display: flex;
+    font-size: 1.25rem;
+    color: var(--title-color);
+    cursor: pointer;
+}
+
+
+
+@media screen and (min-width: 1023px){
+    .nav__menu {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Ubah dari -100 menjadi -100% */
+        background-color: hsla(0, 0%, 10%, .3);
+        width: 75%;
+        height: 100%;
+        padding: 4.5rem 0 0 3rem;
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        transition: right .4s;
+    }
+}
+
+
+.nav__list{
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.nav__link{
+    color: var(--title-color);
+    font-weight: var(--font-medium);
+    transition: color .4s;
+}
+
+.nav__link:hover{
+    color: var(--first-color);
+}
+
+.nav__close{
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+}
+
+.show-menu{
+    right: 0; /* Ubah dari 0 menjadi 0% */
+}
+/*=============== NAV BAR ===============*/
+
+.header{
+    position: fixed;
+    width: 100%;
+    background-color: var(--container-color);
+    top: 0;
+    left: 0;
+    z-index: var(--z-fixed);
+}
+
+.nav{
+    height: var(--header-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav__logo  {
+    color: var(--title-color);
+    font-weight: var(--font-medium);
+}
+
+.nav__logo span{
+    color: var(--first-color);
+}
+
+.nav__toggle,
+.nav__close{
+    display: flex;
+    font-size: 1.25rem;
+    color: var(--title-color);
+    cursor: pointer;
+}
+
+
+
+@media screen and (min-width: 1023px){
+    .nav__menu {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Ubah dari -100 menjadi -100% */
+        background-color: hsla(0, 0%, 10%, .3);
+        width: 75%;
+        height: 100%;
+        padding: 4.5rem 0 0 3rem;
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        transition: right .4s;
+    }
+}
+
+
+.nav__list{
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.nav__link{
+    color: var(--title-color);
+    font-weight: var(--font-medium);
+    transition: color .4s;
+}
+
+.nav__link:hover{
+    color: var(--first-color);
+}
+
+.nav__close{
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+}
+
+.show-menu{
+    right: 0; /* Ubah dari 0 menjadi 0% */
+}
+
 </style>
 
 
