@@ -1,176 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Money Tracker B4</title>
-    <link rel="stylesheet" href="/style/style.css" />
-    <!-- Tambahkan pustaka Font Awesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-    />
-  </head>
-  <body>
-    <nav>
-      <img src="/img/moon.png" id="icon" />
-      <!-- Adding icon in the sidebar -->
-      <a href="#first"><i class="fas fa-coins fa-sm"></i></a>
-      <a href="#second"><i class="fas fa-book fa-sm"></i></a>
-      <a href="#third"><i class="fas fa-book-open fa-sm"></i></a>
-      <a href="#fourth"><i class="fas fa-book-reader fa-sm"></i></i></a>
-      <a href="#fifth"><i class="fas fa-chart-pie fa-sm"></i></a>
-      <div class="logout" onclick="logout()">LOGOUT</div>
-      <script src="/js/login_script.js"></script>
-    </nav>
-    <div class="container">
-      <section id="first">
-        <h1>Money Tracking App</h1>
-        <div class="container">
-          <div class="error_message">
-            <p>Please Enter Budget Amount | More Than 0</p>
-          </div>
-          <div class="budget_content">
-            <div class="ur_budget">
-              <form id="budgetForm">
-                <label for="budget">Your Budget : </label>
-                <input
-                  type="number"
-                  placeholder="Enter Your Budget"
-                  class="budget_input"
-                />
-                <button class="btn" id="btn_budget">Add</button>
-              </form>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Display</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/style/scraping_style.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body>
+    /*=============== NAV BAR ===============*/
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="#" class="nav__logo">
+                Web <span>Scraping B4</span>
+            </a>
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="index.html" class="nav__link">Home</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="home.html#team" class="nav__link">About</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="home.html#project" class="nav__link">Project</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="login.html" class="nav__link">Logout</a>
+                    </li>
+                </ul>
+                <div class="nav__close" id="nav-close">
+                    <i class="ri-close-line"></i>
+                </div>
             </div>
-            <div class="ur_expenses">
-              <form id="expensesForm">
-                <label for="expenses">Expenses Details : </label>
-                <input
-                  type="text"
-                  placeholder="Enter Your Expenses Desc!"
-                  class="expenses_input"
-                />
-                <input
-                  type="number"
-                  placeholder="Enter Your Expenses Amount"
-                  class="expenses_amount"
-                />
-                <label for="expenseDate">Expense Date: </label>
-                <input type="date" id="expenseDate" class="expense_date" />
-                <button class="btn" id="btn_expenses">Add Expenses</button>
-              </form>
+            <div class="nav__toggle" id="nav-toggle">
+                <i class="ri-menu-line"></i>
             </div>
-          </div>
-          <ul class="cards">
-            <li>
-              <i class="bx bx-money"></i>
-              <span class="info">
-                <h3><span>Rp</span><span class="budget_card">0.00</span></h3>
-                <p>Your Wallet</p>
-              </span>
-            </li>
-            <li>
-              <i class="bx bx-credit-card"></i>
-              <span class="info">
-                <h3><span>Rp.</span><span class="expenses_card">0.00</span></h3>
-                <p>Expenses</p>
-              </span>
-            </li>
-            <li>
-              <i class="bx bx-dollar"></i>
-              <span class="info">
-                <h3><span>Rp.</span><span class="balance_card">0.00</span></h3>
-                <p>Balance</p>
-              </span>
-            </li>
-          </ul>
-          <div class="tbl_content">
-            <h3>Budget Details</h3>
-            <div class="tbl_data"></div>
-          </div>
+        </nav>
+    </header>
+    <div class="container mt-5">
+        <div id="data-container" class="row">
+            <!-- Cards will be appended here -->
         </div>
-      </section>
-
-      <section id="second">
-        <h2>Rekap Pengeluaran Harian</h2>
-        <div class="container">
-          <div class="recap_container">
-            <div class="recap_card">
-              <h3>Per Hari</h3>
-              <p>Total: Rp.<span id="dailyTotal">0.00</span></p>
-              <p>
-                Your Wallet: Rp.<span class="wallet_amount">0.00</span><br />
-                <p>
-                Expenses: Rp.<span class="expenses_amount">0.00</span>
-                <br /></p><p>Balance: Rp.<span class="balance_amount">0.00</span>
-              </p></p>
-              <button onclick="downloadTransactions('daily')">
-                Unduh Catatan Keuangan
-              </button>
+        <div class="row">
+            <div class="col-md-12 text-center mt-4">
+                <button id="load-more-btn" class="btn btn-primary">Load More</button>
             </div>
-          </div>
         </div>
-      </section>
-
-      <section id="third">
-        <h2>Rekap Pengeluaran Mingguan</h2>
-        <div class="container">
-          <div class="recap_container">
-            <div class="recap_card">
-              <h3>Per Minggu</h3>
-              <p>Total: Rp.<span id="weeklyTotal">0.00</span></p>
-              <p>
-                Your Wallet: Rp.<span class="wallet_amount">0.00</span><br />
-                <p>
-                Expenses: Rp.<span class="expenses_amount">0.00</span>
-                <br /></p><p>Balance: Rp.<span class="balance_amount">0.00</span>
-              </p></p>
-              <label for="weekSelect">Select Week: </label>
-              <select id="weekSelect" class="week_select">
-                <!-- Opsi minggu akan diisi melalui JavaScript -->
-              </select>
-              <button onclick="downloadTransactions('weekly')">
-                Unduh Catatan Keuangan
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="fourth">
-        <h2>Rekap Pengeluaran Bulanan</h2>
-        <div class="container">
-          <div class="recap_container">
-            <div class="recap_card">
-              <h3>Per Bulan</h3>
-              <p>Total: Rp.<span id="monthlyTotal">0.00</span></p>
-              <p>
-                Your Wallet: Rp.<span class="wallet_amount">0.00</span><br />
-                <p>
-                Expenses: Rp.<span class="expenses_amount">0.00</span>
-                <br /></p><p>Balance: Rp.<span class="balance_amount">0.00</span>
-              </p></p>
-              <label for="monthSelect">Select Month: </label>
-              <select id="monthSelect" class="month_select">
-                <!-- Opsi bulan akan diisi melalui JavaScript -->
-              </select>
-              <button onclick="downloadTransactions('monthly')">
-                Unduh Catatan Keuangan
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="fifth">
-        <div class="wrapper">
-          <canvas id="myChart"></canvas>
-          <h2 class ="finances">Financial Health</h2>
-        </div>
-      </section>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/js/dark_mode.js"></script>
-    <script src="/js/main.js"></script>
-  </body>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/scraping.js"></script>
+</body>
 </html>
