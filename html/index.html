@@ -6,58 +6,84 @@
     <title>Data Display</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <style>
-        body {
-            background-color: #f3f3f3;
-        }
-       .card-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-        .rank {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(255, 255, 255, 0.7);
-            text-align: center;
-            padding: 5px 0;
-            font-size: 20px;
-            color: black;
-            z-index: 1;
-        }
-        .info {
-            display: none;
-            transition: all 0.5s;
-        }
-    </style>
+     body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f4;
+    }
+    .card {
+        border: none;
+        border-radius: 0;
+        margin-bottom: 30px;
+        -webkit-box-shadow: 0 0 35px 0 rgba(154, 161, 171, .15);
+        box-shadow: 0 0 35px 0 rgba(154, 161, 171, .15);
+        transition: all 0.3s ease;
+    }
+
+    .card .card-img-top {
+        border-radius: 10px 10px 0 0;
+    }
+
+    .card:hover {
+        transform: scale(1.03);
+    }
+
+    .card .card-img-top {
+        border-radius: 10px 10px 0 0;
+    }
+
+    .card .card-body {
+        padding: 1.25rem;
+    }
+
+    .card .card-body .card-title {
+        font-size: 1.5rem;
+        margin-bottom: .75rem;
+        color: #343a40;
+    }
+
+    .card .card-body .card-text {
+        color: #868e96;
+    }
+    .card .rank {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        color: white;
+        font-weight: bold;
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 5px;
+        border-radius: 5px;
+    }
+</style>
+
+
 </head>
 <body>
     <div class="container mt-5">
         <div id="data-container" class="row">
             <!-- Cards will be appended here -->
         </div>
+
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $.getJSON('hasil.json', function(data) {
-                data.forEach(function(item) {
-                    var rankClass = '';
-                    if (item.rank === 1) {
-                        rankClass = 'rank-1';
-                    } else if (item.rank === 2) {
-                        rankClass = 'rank-2';
-                    } else if (item.rank === 3) {
-                        rankClass = 'rank-3';
-                    }
-                    $('#data-container').append(`
-                        <div class="col-md-4 mb-4">
-                            <div class="card ${rankClass}">
-                                <div class="rank">Rank: ${item.rank}</div>
-                                <img class="card-image" src="${item.image}" alt="Image">
-                                <div class="info">
+  <script>
+$(document).ready(function() {
+    $.getJSON('hasil.json', function(data) {
+        var row = $('<div class="row"></div>');
+        data.forEach(function(item, index) {
+            var rgbColor = 'rgb(' + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ')';
+            var card = `
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="row no-gutters">
+                            <div class="col-md-4 position-relative">
+                                <div class="rank" style="background-color: ${rgbColor};">Rank: ${item.rank}</div>
+                                <img class="card-img-top" src="${item.image}" alt="Image">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">${item.title}</h5>
                                     <p class="card-text">${item.synopsis}</p>
                                     <p><strong>Score:</strong> ${item.score}</p>
                                     <p><strong>Volume:</strong> ${item.volume}</p>
@@ -68,14 +94,20 @@
                                 </div>
                             </div>
                         </div>
-                    `);
-                });
-
-                $('.card-image').click(function() {
-                    $(this).siblings('.info').slideToggle();
-                });
-            });
+                    </div>
+                </div>
+            `;
+            row.append(card);
+            if ((index + 1) % 2 === 0) {
+                $('#data-container').append(row);
+                row = $('<div class="row"></div>');
+            }
         });
-    </script>
+        if (row.children().length > 0) {
+            $('#data-container').append(row);
+        }
+    });
+});
+</script>
 </body>
 </html>
