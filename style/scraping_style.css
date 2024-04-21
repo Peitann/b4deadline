@@ -51,18 +51,18 @@ body {
       --smaller-font-size: .813rem;
     }
   }
-  
+
   /*=============== BASE ===============*/
   * {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
   }
-  
+
   html {
     scroll-behavior: smooth;
   }
-  
+
   input,
   textarea,
   button,
@@ -70,19 +70,19 @@ body {
     font-family: var(--body-font);
     font-size: var(--normal-font-size);
   }
-  
+
   input,
   textarea,
   button {
     outline: none;
     border: none;
   }
-  
+
   h1, h2, h3, h4 {
     color: var(--title-color);
     font-weight: var(--font-medium);
   }
-  
+
   ul {
     list-style: none;
   }
@@ -170,7 +170,7 @@ body {
     display: flex;
     font-size: 1.25rem;
     color: var(--title-color);
-    cursor: pointer; 
+    cursor: pointer;
 }
 
 
