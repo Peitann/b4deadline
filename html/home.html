@@ -13,9 +13,39 @@
             margin-top: 20px;
         }
     </style>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
 </head>
 <body>
-    
+    /*=============== NAV BAR ===============*/
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="#welcome" class="nav__logo">
+                Website <span>Team B4</span>
+            </a>
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="#welcome" class="nav__link">Home</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#project" class="nav__link">Project</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#team" class="nav__link">Team</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="/html/login.html" class="nav__link">Logout</a>
+                    </li>
+                </ul>
+                <div class="nav__close" id="nav-close">
+                    <i class="ri-close-line"></i>
+                </div>
+            </div>
+            <div class="nav__toggle" id="nav-toggle">
+                <i class="ri-menu-line"></i>
+            </div>
+        </nav>
+    </header>
     <section id="welcome">
         
         <div class="container">
@@ -29,7 +59,7 @@
                     <button class="btn btn-warning" onclick="goToSection('team')">Team</button>
                 </div>
                 <div class="col-md-6">
-                    <img src="/img/2.png">
+                    <img src="/img/logob4.PNG">
                 </div>
             </div>
         </div>
@@ -76,6 +106,22 @@
         </h5>
     </section>
     <script>
+        /*=============== NAV BAR ===============*/
+        const navMenu = document.getElementById('nav-menu'),
+                navToggle = document.getElementById('nav-toggle'),
+                navClose = document.getElementById('nav-close')
+
+        if(navToggle){
+            navToggle.addEventListener('click', () =>{
+                navMenu.classList.add('show-menu')
+            })
+        }
+
+        if(navClose){
+            navClose.addEventListener('click', () =>{
+                navMenu.classList.remove('show-menu')
+            })
+        }
         // Fungsi untuk menangani klik tombol
         function goToSection(sectionId) {
             // Dapatkan elemen dengan id yang sesuai

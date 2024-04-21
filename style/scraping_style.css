@@ -154,7 +154,7 @@ body {
         top: 0;
         right: -100%; /* Ubah dari -100 menjadi -100% */
         background-color: hsla(0, 0%, 10%, .3);
-        width: 75%;
+        width: 50%;
         height: 100%;
         padding: 4.5rem 0 0 3rem;
         backdrop-filter: blur(24px);
