@@ -1,7 +1,7 @@
  body {
         font-family: 'Arial', sans-serif;
         background-color: #5B205A;
-         background-image: url('../img/Shinoa.jpg');
+         background-image: url('./img/Shinoa.jpg');
         background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
