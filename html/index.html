@@ -10,6 +10,10 @@
         font-family: 'Arial', sans-serif;
         background-color: #f4f4f4;
     }
+     @keyframes fadeIn {
+        0% {opacity: 0;}
+        100% {opacity: 1;}
+    }
     .card {
         border: none;
         border-radius: 0;
@@ -85,7 +89,7 @@ $(document).ready(function() {
                                 <div class="card-body">
                                     <h5 class="card-title">${item.title}</h5>
                                     <p class="card-text">${item.synopsis}</p>
-                                    <p><strong>Score:</strong> ${item.score}</p>
+                                    <p><strong><span style="color: yellow;">&#9733;</span>  Score:</strong> ${item.score}</p>
                                     <p><strong>Volume:</strong> ${item.volume}</p>
                                     <p><strong>Date:</strong> ${item.date}</p>
                                     <p><strong>Members:</strong> ${item.members}</p>
