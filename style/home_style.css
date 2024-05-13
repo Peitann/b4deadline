@@ -184,7 +184,9 @@ body {
     border: none;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     transition: box-shadow 0.3s ease;
-    width: calc(33.333% - 30px); /* Calculate width for three columns layout with gap */
+    width: 100%; 
+    border-radius: 20px;
+    text-align: center;
 }
 
 #project .card:hover {
@@ -199,6 +201,7 @@ body {
 #project .card-img-top {
     height: 200px;
     object-fit: cover;
+    border-radius: 20px;
 }
 
 #project button {
@@ -301,6 +304,13 @@ body {
     color: var(--title-color);
     font-weight: var(--font-medium);
     padding-left: 3%;
+    text-decoration: none;
+    transition: color .4s;
+}
+
+.nav__logo:hover{
+    color: var(--first-color);
+    text-decoration: none;
 }
 
 .nav__logo span{
@@ -344,10 +354,12 @@ body {
     color: var(--title-color);
     font-weight: var(--font-medium);
     transition: color .4s;
+    text-decoration: none;
 }
 
 .nav__link:hover{
     color: var(--first-color);
+    text-decoration: none;
 }
 
 .nav__close{

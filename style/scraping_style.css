@@ -1,3 +1,9 @@
+ html {
+    scroll-behavior: smooth;
+}
+ul {
+    list-style: none;
+}
  body {
         font-family: 'Arial', sans-serif;
         background-color: #5B205A;
@@ -184,6 +190,14 @@
 .nav__logo  {
     color: var(--title-color);
     font-weight: var(--font-medium);
+    padding-left: 3%;
+    text-decoration: none;
+    transition: color .4s;
+}
+
+.nav__logo:hover{
+    color: var(--first-color);
+    text-decoration: none;
 }
 
 .nav__logo span{
@@ -206,7 +220,7 @@
         top: 0;
         right: -100%; /* Ubah dari -100 menjadi -100% */
         background-color: hsla(0, 0%, 10%, .3);
-        width: 75%;
+        width: 50%;
         height: 100%;
         padding: 4.5rem 0 0 3rem;
         backdrop-filter: blur(24px);
@@ -226,10 +240,12 @@
     color: var(--title-color);
     font-weight: var(--font-medium);
     transition: color .4s;
+    text-decoration: none;
 }
 
 .nav__link:hover{
     color: var(--first-color);
+    text-decoration: none;
 }
 
 .nav__close{
