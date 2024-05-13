@@ -36,7 +36,7 @@ $(document).ready(function() {
     }
 
     function fetchData() {
-        $.getJSON("/manga/hasil.json", function(data) {
+        $.getJSON("./manga/hasil.json", function(data) {
             const startIndex = (page - 1) * itemsPerPage;
             const slicedData = data.slice(startIndex, startIndex + itemsPerPage);
             displayData(slicedData);
@@ -56,3 +56,20 @@ $(document).ready(function() {
     // Initial data fetch
     fetchData();
 });
+/*=============== NAV BAR ===============*/
+const navMenu = document.getElementById('nav-menu'),
+        navToggle = document.getElementById('nav-toggle'),
+        navClose = document.getElementById('nav-close')
+
+if(navToggle){
+    navToggle.addEventListener('click', () =>{
+        navMenu.classList.add('show-menu')
+    })
+}
+
+if(navClose){
+    navClose.addEventListener('click', () =>{
+        navMenu.classList.remove('show-menu')
+    })
+}
+

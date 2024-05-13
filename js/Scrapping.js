@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $.getJSON('hasil.json', function(data) {
+    $.getJSON('.hasil.json', function(data) {
         var row = $('<div class="row"></div>');
         data.forEach(function(item, index) {
             var rgbColor = 'rgb(' + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ')';

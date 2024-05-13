@@ -20,5 +20,5 @@ function loginSuccess() {
 
 function logout() {
   // Redirect to the desired page upon logout
-  window.location.href = "login.html";
+  window.location.href = "index.html";
 }
