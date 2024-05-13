@@ -164,6 +164,7 @@ body {
 .nav__logo  {
     color: var(--title-color);
     font-weight: var(--font-medium);
+    padding-left: 3%;
 }
 
 .nav__logo span{
@@ -221,4 +222,3 @@ body {
 .show-menu{
     right: 0; /* Ubah dari 0 menjadi 0% */
 }
-
