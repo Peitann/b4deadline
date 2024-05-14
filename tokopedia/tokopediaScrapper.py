@@ -1,0 +1,76 @@
+from selenium import webdriver
+import time
+from bs4 import BeautifulSoup
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+
+
+#Yang perlu di install
+#pip install selenium
+#pip install beautifulsoup4
+#jangan lupa install chromedriver dulu
+
+#inisiasi driverchrome
+option = webdriver.ChromeOptions()
+option.add_experimental_option('excludeSwitches', ['enable-logging'])
+driver = webdriver.Chrome(options=option)
+
+#Link website yang ingin diambil datanya
+#note : kalau mau liat website yang diambil datanya, buka link ini di browser
+#       dan lihat elemen yang ingin diambil datanya
+#       https://www.tokopedia.com/search?st=&q=laptop&srp_component_id=02.01.00.00&srp_page_id=&srp_page_title=&navsource=
+#       jangan search manual laptop di tokopedia ntar gak sesuai sama yang lagi di scrap di program ini
+
+
+url = "https://www.tokopedia.com/search?st=&q=laptop&srp_component_id=02.01.00.00&srp_page_id=&srp_page_title=&navsource="
+driver.get(url)
+
+#Kalau internetnya gacor plus laptop gacor timesleep nya ubah aja ke 1 detik
+
+#Buat nunggu website dimuat dulu
+WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.CSS_SELECTOR, '#zeus-root')))
+time.sleep(2)
+
+#buat ngescroll
+for scroll in range(34):
+    driver.execute_script("window.scrollBy(0, 250);")
+    time.sleep(2)
+driver.execute_script("window.scrollTo(50, 0);")
+time.sleep(2)
+
+#mengambil data html website
+soup = BeautifulSoup(driver.page_source, 'html.parser')
+
+#buat test aja
+#print(soup)
+
+#mengambil data yang diinginkan
+
+counter = 1
+for laptop in soup.find_all('div', class_='css-1asz3by'):
+    nama = laptop.find('div', class_='prd_link-product-name css-3um8ox').text
+    harga = laptop.find('div', class_='prd_link-product-price css-h66vau').text
+    lokasi = laptop.find('span', class_='prd_link-shop-loc css-1kdc32b flip')
+    toko = laptop.find('span', class_='prd_link-shop-name css-1kdc32b flip')
+    rating = laptop.find('span', class_='prd_rating-average-text css-t70v7i')
+    terjual = laptop.find('span', class_='prd_label-integrity css-1sgek4h')
+
+
+    print(f"{counter}. {nama}")
+    print(f"Harga: {harga}")
+    if lokasi:
+        print(f"Lokasi: {lokasi.text}")
+    if toko:
+        print(f"Toko: {toko.text}")
+    if rating:
+        print(f"Rating: {rating.text}")
+    if terjual:
+        print(f"Terjual: {terjual.text}")
+    counter += 1
+
+#nutup browser jika sudah selesai
+driver.close()
+
+
+#20:46
