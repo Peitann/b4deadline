@@ -30,56 +30,62 @@ driver.get(url)
 
 #Kalau internetnya gacor plus laptop gacor timesleep nya ubah aja ke 1 detik
 
-#Buat nunggu website dimuat dulu
-WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.CSS_SELECTOR, '#zeus-root')))
-time.sleep(2)
-
-#buat ngescroll
-for scroll in range(25):
-    driver.execute_script("window.scrollBy(0, 250);")
-    time.sleep(2)
-driver.execute_script("window.scrollTo(50, 0);")
-time.sleep(2)
-
-#mengambil data html website
-soup = BeautifulSoup(driver.page_source, 'html.parser')
-
-#buat test aja
-#print(soup)
-
-#mengambil data yang diinginkan
 data = []
-counter = 1
-for laptop in soup.find_all('div', class_='css-1asz3by'):
-    nama = laptop.find('div', class_='prd_link-product-name css-3um8ox')
-    harga = laptop.find('div', class_='prd_link-product-price css-h66vau')
-    lokasi = laptop.find('span', class_='prd_link-shop-loc css-1kdc32b flip')
-    toko = laptop.find('span', class_='prd_link-shop-name css-1kdc32b flip')
-    rating = laptop.find('span', class_='prd_rating-average-text css-t70v7i')
-    terjual = laptop.find('span', class_='prd_label-integrity css-1sgek4h')
 
-    print(f"{counter}. {nama.text if nama else ''}")
-    print(f"Harga: {harga.text if harga else ''}")
-    if lokasi:
-        print(f"Lokasi: {lokasi.text}")
-    if toko:
-        print(f"Toko: {toko.text}")
-    if rating:
-        print(f"Rating: {rating.text}")
-    if terjual:
-        print(f"Terjual: {terjual.text}")
-    print("\n")
-    counter += 1
+#ubah range nya kalau mau ambil lebih banyak data misal 3 maka bakal ngambil 3 halaman
+for halaman in range(3):
+    #Buat nunggu website dimuat dulu
+    WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.CSS_SELECTOR, '#zeus-root')))
+    time.sleep(2)
 
-    #menambahkan data ke dictionary data
-    data.append({
-        'nama': nama.text if nama else None,
-        'harga': harga.text if harga else None,
-        'lokasi': lokasi.text if lokasi else None,
-        'toko': toko.text if toko else None,
-        'rating': rating.text if rating else None,
-        'terjual': terjual.text if terjual else None
-    })
+    #buat ngescroll
+    for scroll in range(25):
+        driver.execute_script("window.scrollBy(0, 250);")
+        time.sleep(2)
+    driver.execute_script("window.scrollTo(50, 0);")
+    time.sleep(2)
+
+    #mengambil data html website
+    soup = BeautifulSoup(driver.page_source, 'html.parser')
+
+    #buat test aja
+    #print(soup)
+
+    #mengambil data yang diinginkan
+    counter = 1
+    for laptop in soup.find_all('div', class_='css-1asz3by'):
+        nama = laptop.find('div', class_='prd_link-product-name css-3um8ox')
+        harga = laptop.find('div', class_='prd_link-product-price css-h66vau')
+        lokasi = laptop.find('span', class_='prd_link-shop-loc css-1kdc32b flip')
+        toko = laptop.find('span', class_='prd_link-shop-name css-1kdc32b flip')
+        rating = laptop.find('span', class_='prd_rating-average-text css-t70v7i')
+        terjual = laptop.find('span', class_='prd_label-integrity css-1sgek4h')
+
+        print(f"{counter}. {nama.text if nama else ''}")
+        print(f"Harga: {harga.text if harga else ''}")
+        if lokasi:
+            print(f"Lokasi: {lokasi.text}")
+        if toko:
+            print(f"Toko: {toko.text}")
+        if rating:
+            print(f"Rating: {rating.text}")
+        if terjual:
+            print(f"Terjual: {terjual.text}")
+        print("\n")
+        counter += 1
+
+        #menambahkan data ke dictionary data
+        data.append({
+            'nama': nama.text if nama else None,
+            'harga': harga.text if harga else None,
+            'lokasi': lokasi.text if lokasi else None,
+            'toko': toko.text if toko else None,
+            'rating': rating.text if rating else None,
+            'terjual': terjual.text if terjual else None
+        })
+time.sleep(2)
+driver.find_element(By.CSS_SELECTOR, 'button[aria-label="Laman berikutnya"]').click()
+time.sleep(2)
 
 #mengubah data ke csv
 df = pd.DataFrame(data, columns=['nama', 'harga', 'lokasi', 'toko', 'rating', 'terjual'])
