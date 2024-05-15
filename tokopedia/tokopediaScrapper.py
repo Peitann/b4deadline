@@ -5,6 +5,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 import pandas as pd
+import json
 
 
 #Yang perlu di donwload
@@ -83,13 +84,17 @@ for halaman in range(3):
             'rating': rating.text if rating else None,
             'terjual': terjual.text if terjual else None
         })
-time.sleep(2)
-driver.find_element(By.CSS_SELECTOR, 'button[aria-label="Laman berikutnya"]').click()
-time.sleep(2)
+    time.sleep(2)
+    driver.find_element(By.CSS_SELECTOR, 'button[aria-label="Laman berikutnya"]').click()
+    time.sleep(2)
 
 #mengubah data ke csv
 df = pd.DataFrame(data, columns=['nama', 'harga', 'lokasi', 'toko', 'rating', 'terjual'])
 df.to_csv('laptop_gaming_tokopedia.csv', index=False, sep=';')
+
+#mengubah data ke json
+with open('laptop_gaming_tokopedia.json', 'w') as f:
+    json.dump(data, f)
 
 #cek df apakah sudah benar atau tidak
 print(df)
