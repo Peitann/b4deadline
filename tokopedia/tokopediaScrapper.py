@@ -6,7 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
 
-#Yang perlu di install
+#Yang perlu di donwload
 #pip install selenium
 #pip install beautifulsoup4
 #jangan lupa install chromedriver dulu
@@ -19,11 +19,11 @@ driver = webdriver.Chrome(options=option)
 #Link website yang ingin diambil datanya
 #note : kalau mau liat website yang diambil datanya, buka link ini di browser
 #       dan lihat elemen yang ingin diambil datanya
-#       https://www.tokopedia.com/search?st=&q=laptop&srp_component_id=02.01.00.00&srp_page_id=&srp_page_title=&navsource=
+#       https://www.tokopedia.com/search?st=&q=laptop%20gaming&srp_component_id=02.01.00.00&srp_page_id=&srp_page_title=&navsource=
 #       jangan search manual laptop di tokopedia ntar gak sesuai sama yang lagi di scrap di program ini
 
 
-url = "https://www.tokopedia.com/search?st=&q=laptop&srp_component_id=02.01.00.00&srp_page_id=&srp_page_title=&navsource="
+url = "https://www.tokopedia.com/search?st=&q=laptop%20gaming&srp_component_id=02.01.00.00&srp_page_id=&srp_page_title=&navsource="
 driver.get(url)
 
 #Kalau internetnya gacor plus laptop gacor timesleep nya ubah aja ke 1 detik
@@ -33,7 +33,7 @@ WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.CSS_SELECTOR, 
 time.sleep(2)
 
 #buat ngescroll
-for scroll in range(34):
+for scroll in range(25):
     driver.execute_script("window.scrollBy(0, 250);")
     time.sleep(2)
 driver.execute_script("window.scrollTo(50, 0);")
