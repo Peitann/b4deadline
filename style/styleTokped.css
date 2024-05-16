@@ -1,0 +1,274 @@
+html {
+  scroll-behavior: smooth;
+}
+ul {
+  list-style: none;
+}
+body {
+      font-family: 'Arial', sans-serif;
+      background-color: #ffffff;
+      background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+
+  }
+   @keyframes fadeIn {
+      0% {opacity: 0;}
+      100% {opacity: 1;}
+  }
+
+  /*=============== NAV BAR ===============*/
+:root{
+  --header-height:3.5rem;
+  --hue: 162;
+  --first-color: hsl(var(--hue), 100%, 40%);
+  --first-color-alt: hsl(var(--hue), 56%, 35%);
+  --title-color: hsl(228, 8%, 95%);
+  --text-color: hsl(228, 8%, 65%);
+  --body-color: hsl(228, 15%, 20%);
+  --container-color: hsl(228, 15%, 15%);
+
+  /*========== Font and typography ==========*/
+  /*.5rem = 8px | 1rem = 16px ...*/
+  --body-font: "Poppins", sans-serif;
+  --biggest-font-size: 2rem;
+  --bigger-font-size: 1.25rem;
+  --h1-font-size: 1.5rem;
+  --h2-font-size: 1.25rem;
+  --h3-font-size: 1rem;
+  --normal-font-size: .938rem;
+  --small-font-size: .813rem;
+  --smaller-font-size: .75rem;
+
+  /*========== Font weight ==========*/
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semi-bold: 600;
+
+  /*========== z index ==========*/
+  --z-tooltip: 10;
+  --z-fixed: 100;
+}
+.header{
+  position: fixed;
+  width: 100%;
+  background-color: var(--container-color);
+  top: 0;
+  left: 0;
+  z-index: var(--z-fixed);
+}
+
+.nav{
+  height: var(--header-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav__logo  {
+  color: var(--title-color);
+  font-weight: var(--font-medium);
+  padding-left: 1%;
+  text-decoration: none;
+    transition: color .4s;
+}
+
+.nav__logo span{
+  color: var(--first-color);
+}
+
+.nav__toggle,
+.nav__close{
+  display: flex;
+  padding-right: 3%;
+  font-size: 1.25rem;
+  color: var(--title-color);
+  cursor: pointer;
+}
+
+.B4XTokped {
+  background-image: url('../img/B4 X tokopedia (1).png');
+  background-size: 685px 116px; /* Menyesuaikan ukuran gambar dengan ukuran container */
+  background-position: center; /* Memposisikan gambar ke tengah */
+  margin-top: 8%;
+  margin-bottom: 2%;
+  /* Opsional: Menentukan tinggi dan lebar container untuk sesuaikan gambar */
+  width: 685px;
+  height: 116px;
+}
+
+.h2Judul {
+  
+  font-size: 10rem;
+  font-weight: 600;
+  color: #333333;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+/* Container Header */
+.Header {
+  padding: 20px; /* Padding di dalam container */
+  text-align: center; /* Pusatkan teks di dalam container */
+  margin-top: 20px; /* Jarak dari elemen di atas */
+}
+
+/* Gaya tulisan di dalam Header */
+#ScrapHead {
+  font-family: 'Lato', sans-serif;
+ /* Font yang digunakan */
+  font-size: 2rem; /* Ukuran font */
+  color: #565656; /* Warna teks */
+  font-weight: bold; /* Ketebalan font */
+  margin: 0; /* Hilangkan margin default */
+}
+
+/* Flex container to align sub-containers in one row */
+.flex-container {
+  background-color: #A7F783;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap; 
+  margin-top: 5px; 
+  border-radius: 20px;
+}
+
+/* Style for individual sub-containers */
+.sub-container {
+  background-color: #84C567;
+  padding: 10px; 
+  border-radius: 20px; 
+  flex: 1 1 30%; 
+  margin: 10px; 
+  text-align: center;
+}
+
+@media screen and (min-width: 1023px){
+  .nav__menu {
+      position: fixed;
+      top: 0;
+      right: -100%; /* Ubah dari -100 menjadi -100% */
+      background-color: hsla(0, 0%, 10%, .3);
+      width: 75%;
+      height: 100%;
+      padding: 4.5rem 0 0 3rem;
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      transition: right .4s;
+  }
+}
+
+
+.nav__list{
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.nav__link{
+  color: var(--title-color);
+  font-weight: var(--font-medium);
+  transition: color .4s;
+}
+
+.nav__link:hover{
+  color: var(--first-color);
+}
+
+.nav__close{
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+}
+
+.show-menu{
+  right: 0; /* Ubah dari 0 menjadi 0% */
+}
+/*=============== NAV BAR ===============*/
+
+.header{
+  position: fixed;
+  width: 100%;
+  background-color: var(--container-color);
+  top: 0;
+  left: 0;
+  z-index: var(--z-fixed);
+}
+
+.nav{
+  height: var(--header-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav__logo  {
+  color: var(--title-color);
+  font-weight: var(--font-medium);
+  padding-left: 3%;
+  text-decoration: none;
+  transition: color .4s;
+}
+
+.nav__logo:hover{
+  color: var(--first-color);
+  text-decoration: none;
+}
+
+.nav__logo span{
+  color: var(--first-color);
+}
+
+.nav__toggle,
+.nav__close{
+  display: flex;
+  font-size: 1.25rem;
+  color: var(--title-color);
+  cursor: pointer;
+}
+
+
+
+@media screen and (min-width: 1023px){
+  .nav__menu {
+      position: fixed;
+      top: 0;
+      right: -100%; /* Ubah dari -100 menjadi -100% */
+      background-color: hsla(0, 0%, 10%, .3);
+      width: 50%;
+      height: 100%;
+      padding: 4.5rem 0 0 3rem;
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      transition: right .4s;
+  }
+}
+
+
+.nav__list{
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.nav__link{
+  color: var(--title-color);
+  font-weight: var(--font-medium);
+  transition: color .4s;
+  text-decoration: none;
+}
+
+.nav__link:hover{
+  color: var(--first-color);
+  text-decoration: none;
+}
+
+.nav__close{
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+}
+
+.show-menu{
+  right: 0; /* Ubah dari 0 menjadi 0% */
+}
