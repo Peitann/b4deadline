@@ -129,19 +129,120 @@ body {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap; 
-  margin-top: 5px; 
+  margin-left: 0px;
   border-radius: 20px;
+  width: 290px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 /* Style for individual sub-containers */
 .sub-container {
   background-color: #84C567;
   padding: 10px; 
-  border-radius: 20px; 
+  border-radius: 10px; 
   flex: 1 1 30%; 
   margin: 10px; 
+  margin-left: 5px;
+  margin-right: 5px;
   text-align: center;
+  font-size: 13px;
+  color: white;
+  border: 0px;
 }
+
+.sub-container:hover{
+  background-color: #DCFCCD;
+  color: #565656;
+}
+
+.additional-container {
+  background-color: #84C567; /* Warna latar belakang */
+  padding: 10px; /* Padding */
+  border-radius: 10px; /* Sudut border */
+  flex: 1 1 30%; /* Ukuran flex */
+  margin: 10px; /* Jarak antara container */
+  margin-left: 5px; /* Jarak kiri */
+  margin-right: 5px; /* Jarak kanan */
+  text-align: center; /* Pusatkan teks */
+  font-size: 13px; /* Ukuran font */
+  color: white; /* Warna teks */
+}
+
+.menu {
+  display: grid;
+  grid-template-columns: 1.5fr 3.5fr; /* Dua kolom dengan lebar yang sama */
+  gap: 0px; /* Jarak antar elemen */
+  margin-top: 5px; 
+}
+
+.menucari {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap; 
+  margin-top: 12px; 
+  margin-left: 0px;
+  border-radius: 20px;
+  width: 350px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+/* Style the dropdown button */
+.dropbtn {
+  background-color: transparent;
+  color: #6c757d;
+  padding: 12px;
+  font-size: 16px;
+  border-color: #6c757d;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #2980b9;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+  background-color: #2980b9;
+}
+
 
 @media screen and (min-width: 1023px){
   .nav__menu {
