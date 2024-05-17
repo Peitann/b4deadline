@@ -176,17 +176,6 @@ body {
   margin-top: 5px; 
 }
 
-.menucari {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap; 
-  margin-top: 12px; 
-  margin-left: 0px;
-  border-radius: 20px;
-  width: 350px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
 
 /* Style the dropdown button */
 .dropbtn {
@@ -241,6 +230,30 @@ body {
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {
   background-color: #2980b9;
+}
+
+
+/*Laptop Gaming List Table*/
+table{
+  width:  100%;
+  margin: 5px;
+}
+
+table th{
+  color: #585858;
+  text-align: center;
+  padding: 10px 0;
+  background-color: #DCFCCD;
+  /* background-color: #fff; */
+  border:  thin solid #d4d4d4;
+}
+
+table td{
+  padding: 10px;
+  border:  thin solid #d4d4d4;
+  width: 18%;
+  text-align: center;
+  background-color: #fff;
 }
 
 
