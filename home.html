@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B4 Team Website</title>
+    <link rel="stylesheet" href="./style/home_style.css">
+    <style>
+        /* Tambahan CSS */
+        .logout-btn-container {
+            margin-left: auto;
+            margin-top: 20px;
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body>
+    /*=============== NAV BAR ===============*/
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="#welcome" class="nav__logo">
+                Website <span>Team B4</span>
+            </a>
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="#welcome" class="nav__link">Home</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#project" class="nav__link">Project</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#team" class="nav__link">Team</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="index.html" class="nav__link">Logout</a>
+                    </li>
+                </ul>
+                <div class="nav__close" id="nav-close">
+                    <i class="ri-close-line"></i>
+                </div>
+            </div>
+            <div class="nav__toggle" id="nav-toggle">
+                <i class="ri-menu-line"></i>
+            </div>
+        </nav>
+    </header>
+    <section id="welcome">
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1>Hi, <span>We are B4 Team,</span></h1>
+                    <h2>Welcome to our Website!</h2>
+                    <p>We are informatics engineering students from Bandung State Polytechnic, here is the homepage of the project for the group website assignment that we created.</p>
+                    <h3>Thank you for visiting!</h3>
+                    <button class="btn btn-warning" onclick="goToSection('project')">Project</button>
+                    <button class="btn btn-warning" onclick="goToSection('team')">Team</button>
+                </div>
+                <div class="col-md-6">
+                    <img src="/img/logob4.PNG">
+                </div>
+            </div>
+        </div>
+        
+    </section>
+
+    <section id="project" class="nav-link">
+        <div class="container">
+            <h2>Projects</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card shadow-lg">
+                        <img class="card-img-top" src="/img/money_tracking_web.PNG" alt="Card image cap">
+                        <div class="card-body">
+                          <p class="card-text">Money Tracking Website</p>
+                        </div>
+                    </div>
+                </div>
+                <a href="moneyTracking.html#first"><button class="btn btn-warning">Visit Money Tracking Website</button></a>
+                <div></div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img class="card-img-top" src="/img/mangascrap.PNG" alt="Card image cap">
+                        <div class="card-body">
+                          <p class="card-text">Web Scraping Website</p>
+                        </div>
+                    </div>
+                </div>
+                <div></div>
+                <a href="mangaScraping.html"><button class="btn btn-warning">Visit Web Scraping Website</button></a>
+            </div>
+        </div>
+    </section>
+    
+    <section id="team" class="nav-link">
+        <h1>Let's meet our Team!</h1>
+        <h4>B4 Team</h4>
+        <h5>
+            <ul>Ahmad Fatan Haidar</ul>
+            <ul>Daffa Muzhaffar Fakhruddin</ul>
+            <ul>Muhammad Adhyaksa</ul>
+            <ul>Muhammad Rafli Fadhilah</ul>
+            <ul>Nesta Rizkia Saputra</ul>
+        </h5>
+    </section>
+    <script>
+        /*=============== NAV BAR ===============*/
+        const navMenu = document.getElementById('nav-menu'),
+                navToggle = document.getElementById('nav-toggle'),
+                navClose = document.getElementById('nav-close')
+
+        if(navToggle){
+            navToggle.addEventListener('click', () =>{
+                navMenu.classList.add('show-menu')
+            })
+        }
+
+        if(navClose){
+            navClose.addEventListener('click', () =>{
+                navMenu.classList.remove('show-menu')
+            })
+        }
+        // Fungsi untuk menangani klik tombol
+        function goToSection(sectionId) {
+            // Dapatkan elemen dengan id yang sesuai
+            var section = document.getElementById(sectionId);
+            
+            // Lakukan scroll ke elemen yang sesuai dengan transisi smooth
+            section.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

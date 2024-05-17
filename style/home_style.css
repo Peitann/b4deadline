@@ -1,0 +1,374 @@
+@import url('https://fonts.cdnfonts.com/css/google-sans');
+
+:root{
+    --header-height:3.5rem;
+    --hue: 162;
+    --first-color: hsl(var(--hue), 100%, 40%);
+    --first-color-alt: hsl(var(--hue), 56%, 35%);
+    --title-color: hsl(228, 8%, 95%);
+    --text-color: hsl(228, 8%, 65%);
+    --body-color: hsl(228, 15%, 20%);
+    --container-color: hsl(228, 15%, 15%);
+
+    /*========== Font and typography ==========*/
+    /*.5rem = 8px | 1rem = 16px ...*/
+    --body-font: "Poppins", sans-serif;
+    --biggest-font-size: 2rem;
+    --bigger-font-size: 1.25rem;
+    --h1-font-size: 1.5rem;
+    --h2-font-size: 1.25rem;
+    --h3-font-size: 1rem;
+    --normal-font-size: .938rem;
+    --small-font-size: .813rem;
+    --smaller-font-size: .75rem;
+
+    /*========== Font weight ==========*/
+    --font-regular: 400;
+    --font-medium: 500;
+    --font-semi-bold: 600;
+
+    /*========== z index ==========*/
+    --z-tooltip: 10;
+    --z-fixed: 100;
+}
+
+/*========== Responsive typography ==========*/
+@media screen and (min-width: 1152px) {
+    :root {
+      --biggest-font-size: 4rem;
+      --bigger-font-size: 2rem;
+      --h1-font-size: 2.25rem;
+      --h2-font-size: 1.5rem;
+      --h3-font-size: 1.25rem;
+      --normal-font-size: 1rem;
+      --small-font-size: .875rem;
+      --smaller-font-size: .813rem;
+    }
+  }
+  
+  /*=============== BASE ===============*/
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  input,
+  textarea,
+  button,
+  body {
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+  }
+  
+  body {
+    background-color: var(--body-color);
+    color: var(--text-color);
+  }
+  
+  input,
+  textarea,
+  button {
+    outline: none;
+    border: none;
+  }
+  
+  h1, h2, h3, h4 {
+    color: var(--title-color);
+    font-weight: var(--font-medium);
+  }
+  
+  ul {
+    list-style: none;
+  }
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styles */
+body {
+    font-family: 'Product Sans', sans-serif;
+    background-color: #f7f7f7; /* Ganti sesuai preferensi Anda */
+}
+
+/* Welcome Section */
+#welcome {
+    background-color: #150734;
+    display: flex; /* Use flexbox for aligning elements side by side */
+    align-items: center; /* Align items vertically in the center */
+    justify-content: flex-start; /* Align content to the left */
+    padding: 150px 20px; /* Add padding for top and sides */
+    text-align: left; /* Align text to the left */
+}
+
+#welcome h1 {
+    color: #fff;
+    font-size: 36px; /* Ganti ukuran font sesuai kebutuhan */
+    margin-bottom: 20px;
+}
+
+#welcome span {
+    color: orange;
+}
+
+#welcome h2 {
+    color: #fff;
+    font-size: 24px; /* Ganti ukuran font sesuai kebutuhan */
+    margin-bottom: 20px;
+}
+
+#welcome h3{
+    color: #fff;
+    font-size: 20px; /* Ganti ukuran font sesuai kebutuhan */
+    margin-bottom: 20px;
+}
+
+#welcome p {
+    color: #fff;
+    font-size: 16px; /* Ganti ukuran font sesuai kebutuhan */
+    margin-bottom: 30px;
+}
+
+#welcome button {
+    padding: 15px 30px; /* Ubah padding sesuai kebutuhan */
+    background-color: orange;
+    color: #fff; /* Tambahkan warna teks agar terlihat */
+    border: none;
+    border-radius: 5px; /* Ubah border-radius sesuai preferensi Anda */
+    cursor: pointer; /* Ubah kursor saat mengarahkan ke tombol */
+    transition: background-color 0.3s ease; /* Tambahkan efek transisi */
+}
+
+#welcome button:hover {
+    background-color: #ff8c00; /* Ganti warna latar saat hover */
+}
+
+#welcome img {
+    max-width: 500px;
+    margin-left: auto; /* Add margin-left: auto */
+    margin-top: 20px;
+}
+
+.logout-btn-container {
+    margin-left: auto; /* Tombol logout akan ditempatkan di pojok kanan */
+    margin-top: 20px; /* Jarak antara tombol logout dengan konten lainnya */
+}
+
+/* Project Section */
+#project {
+    padding: 70px 20px;
+    background-color: #fff; /* Ganti sesuai preferensi Anda */
+    display: flex; /* Use flexbox for aligning elements side by side */
+    flex-wrap: wrap; /* Allow elements to wrap to the next line */
+    justify-content: center; /* Center content */
+    gap: 30px; /* Add space between cards */
+}
+
+#project h2 {
+    width: 100%; /* Make sure the title spans the full width */
+    color: #150734;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+
+
+#project .card {
+    border: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: box-shadow 0.3s ease;
+    width: 100%; 
+    border-radius: 20px;
+    text-align: center;
+}
+
+#project .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 12px 40px 0 rgba(0, 0, 0, 0.19); /* Ganti bayangan saat hover */
+}
+
+#project .col-md-4 {
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
+
+#project .card-img-top {
+    height: 200px;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+#project button {
+    padding: 15px 30px; /* Ubah padding sesuai kebutuhan */
+    background-color: orange;
+    color: #fff; /* Tambahkan warna teks agar terlihat */
+    border: none;
+    border-radius: 5px; /* Ubah border-radius sesuai preferensi Anda */
+    cursor: pointer; /* Ubah kursor saat mengarahkan ke tombol */
+    transition: background-color 0.3s ease; /* Tambahkan efek transisi */
+}
+
+#project button:hover {
+    background-color: #ff8c00; /* Ganti warna latar saat hover */
+}
+/* team Section */
+#team {
+    padding-top: 70px;
+    padding-bottom: 70px;
+    background-color: #150734;
+    text-align: center;
+}
+
+#team h1 {
+    color: orange;
+    font-size: 36px; /* Sesuaikan ukuran font sesuai kebutuhan */
+    margin-bottom: 20px; /* Tambahkan margin bottom agar terlihat terpisah dari konten lainnya */
+}
+
+#team h4 {
+    color: #fff;
+    font-size: 20px; /* Sesuaikan ukuran font sesuai kebutuhan */
+    margin-bottom: 30px; /* Tambahkan margin bottom agar terlihat terpisah dari konten lainnya */
+}
+
+#team h5 {
+    color: #fff;
+    font-size: 14px; /* Sesuaikan ukuran font sesuai kebutuhan */
+    margin: 30px 30px 30px; /* Tambahkan margin bottom agar terlihat terpisah dari konten lainnya */
+}
+
+#team a {
+    color: #fff;
+    text-decoration: none;
+}
+
+#team a:hover {
+    text-decoration: underline; /* Tambahkan efek underline saat hover */
+}
+
+/* Responsive Styles */
+@media (max-width: 991px) {
+    #welcome {
+        flex-direction: column; /* Stack elements vertically on smaller screens */
+        align-items: flex-start; /* Align content to the left */
+    }
+
+    #welcome img {
+        margin-left: 0; /* Remove margin on smaller screens */
+        margin-top: 20px; /* Add space between text and image */
+    }
+
+    .logout-btn-container {
+        margin-left: 0; /* Reset margin-left for smaller screens */
+        margin-top: 20px; /* Adjust margin-top for smaller screens */
+        width: 100%; /* Ensure full width for smaller screens */
+        text-align: right; /* Align button to right on smaller screens */
+    }
+
+    #project .card {
+        width: calc(50% - 30px); /* Two columns layout on smaller screens */
+    }
+}
+
+@media (max-width: 767px) {
+    #project .card {
+        width: 100%; /* One column layout on smallest screens */
+    }
+}
+
+/*=============== NAV BAR ===============*/
+
+.header{
+    position: fixed;
+    width: 100%;
+    background-color: var(--container-color);
+    top: 0;
+    left: 0;
+    z-index: var(--z-fixed);
+}
+
+.nav{
+    height: var(--header-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav__logo  {
+    color: var(--title-color);
+    font-weight: var(--font-medium);
+    padding-left: 3%;
+    text-decoration: none;
+    transition: color .4s;
+}
+
+.nav__logo:hover{
+    color: var(--first-color);
+    text-decoration: none;
+}
+
+.nav__logo span{
+    color: var(--first-color);
+}
+
+.nav__toggle,
+.nav__close{
+    display: flex;
+    font-size: 1.25rem;
+    color: var(--title-color);
+    cursor: pointer; 
+    padding-right: 3%;
+}
+
+
+
+@media screen and (min-width: 1023px){
+    .nav__menu {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Ubah dari -100 menjadi -100% */
+        background-color: hsla(0, 0%, 10%, .3);
+        width: 50%;
+        height: 100%;
+        padding: 4.5rem 0 0 3rem;
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        transition: right .4s;
+    }
+}
+
+
+.nav__list{
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.nav__link{
+    color: var(--title-color);
+    font-weight: var(--font-medium);
+    transition: color .4s;
+    text-decoration: none;
+}
+
+.nav__link:hover{
+    color: var(--first-color);
+    text-decoration: none;
+}
+
+.nav__close{
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+}
+
+.show-menu{
+    right: 0; /* Ubah dari 0 menjadi 0% */
+}
+

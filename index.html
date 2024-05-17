@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Website Team B4</title>
+    <link rel="stylesheet" href="./style/login_style.css" />
+    <script src="./js/login_script.js"></script>
+  </head>
+  <body>
+    <div class="title">
+      <h1>Welcome to B4's Website...</h1>
+    </div>
+    <div class="center">
+      <h1>Login</h1>
+      <form
+        method="post"
+        action="javascript:void(0);"
+        onsubmit="return loginSuccess()"
+      >
+        <div class="txt_field">
+          <input type="text" id="username" required />
+          <span></span>
+          <label>Username</label>
+        </div>
+        <div class="txt_field">
+          <input type="password" id="password" required />
+          <span></span>
+          <label>Password</label>
+        </div>
+        <div class="pass">Forgot Password?<span class="hint">...</span></div>
+        <input type="submit" value="Login" />
+      </form>
+    </div>
+  </body>
+</html>

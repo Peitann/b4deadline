@@ -1,64 +1,74 @@
+# Pertama-tama, kita mengimpor beberapa modul yang dibutuhkan
+import heapq
+import json
 import scrapy
+import re
 
+# Kemudian kita mendefinisikan kelas spider kita, yang merupakan turunan dari kelas Spider di Scrapy
 class MangaSpider(scrapy.Spider):
+    # Nama spider kita adalah "manga-spider"
     name = "manga-spider"
+    # URL awal yang akan kita scrape adalah halaman utama dari top manga di MyAnimeList
     start_urls = ["https://myanimelist.net/topmanga.php"]
-    count = 0
-    # Code dibawah adalah mengatasi pagination dengan memanipulasi start.urls
-    # start_urls.insert(0, "https://myanimelist.net/topmanga.php")
+    # Kita juga mendefinisikan variabel results sebagai list kosong, yang akan kita gunakan untuk menyimpan hasil scraping kita
+    results = []
+    counter = 0
+    # Metode parse ini akan dipanggil oleh Scrapy untuk setiap respons yang diterima
+    def parse(self, response, **kwargs):
+        # Untuk setiap manga di halaman (yang diwakili oleh elemen tr dengan kelas 'ranking-list'), kita melakukan beberapa hal
+        for mangas in response.css('tr.ranking-list'):
+            # Kita mengambil beberapa informasi tentang manga tersebut
+            info = mangas.css('div.information.di-ib.mt4::text').getall()
+            # Kita mendapatkan link ke halaman detail manga tersebut
+            manga_link = mangas.css('a.hoverinfo_trigger.fs14.fw-b::attr(href)').get()
+            # Jika link tersebut ada, kita meminta Scrapy untuk mengikuti link tersebut dan memanggil metode parse_manga kita untuk responsnya
+            if manga_link is not None:
+                yield response.follow(manga_link, callback=self.parse_manga, meta={
+                    'rank': int(mangas.css('span.lightLink.top-anime-rank-text::text').get().replace('#', '')),
+                    'title':mangas.css('a.hoverinfo_trigger.fs14.fw-b::text').get(),
+                    'image': mangas.css('img.lazyload::attr(data-src)').get(),
+                    'score': mangas.css('span.text.on::text').get(),
+                    'volume': re.search(r'\((.*?)\)', info[0]).group(1) if re.search(r'\((.*?)\)', info[0]) else None,
+                    'date': info[1].strip(),
+                    'members': re.search(r'([\d,]+)', info[2]).group() if re.search(r'([\d,]+)', info[2]) else None,
+                    'manga_link': manga_link,
+                })
+            self.counter += 1
 
-    # Code dibawah adalah untuk mengatasi pagination dengan mengikuti response halaman
-    def parse(self, response):
-        # Extracting links to individual manga pages
-        manga_links = response.css('tr.ranking-list a.hoverinfo_trigger::attr(href)').getall()
-        for manga_link in manga_links:
-            if self.count < 1000:
-                yield scrapy.Request(url=manga_link, callback=self.parse_manga)
-            else:
-                break
 
-        next_page = response.css('div.pagination a::attr(href)').extract()[-1]
-        if next_page and self.count < 1000:
-            yield response.follow(next_page, callback=self.parse)
-    
-    # Code dibawah adalah code untuk mengambil isi dari page yang sudah diambil dari manga_links
-    def parse_manga(self, response):
-        # Extracting information from individual manga pages
-        rank = response.css('span.numbers.ranked strong::text').get()
-        image = response.css('img::attr(data-src)').get()
-        title = response.css('span.h1-title span[itemprop="name"]::text').get()
-        type = response.css('span.information.type a::text').get()
-        author =  response.css('span.information.studio.author a::text').get()
-        # volumes = response.css('div.spaceit_pad span.dark_text:contains("Volumes:")::text').get()
-        # chapters = response.css('div.spaceit_pad span.dark_text:contains("Chapters:")::text').get()
-        # status = response.css('div.spaceit_pad span.dark_text:contains("Status:")::text').getall().split()
-        # published = response.css('div.spaceit_pad span.dark_text:contains("Published:")::text').getall().split()    
-        # genres = response.css('div.spaceit_pad a::text').getall()
-        # themes = response.css('div.spaceit_pad span.dark_text::text').get()
-        popularity = response.css('span.numbers.popularity strong::text').get()
-        members = response.css('span.numbers.members strong::text').get()
-        score = response.css('div.score-label::text').get()
-        # You can extract more information here as needed
-        yield {
-            'Rank' : rank,
-            'image': image,
-            'title': title,
-            'Type' : type,
-            'Author ' : author,
-            # 'volumes' : volumes,
-            # 'chapters' : chapters,
-            # 'status' : status,
-            # 'published' : published,
-            # 'Genres' : genres,
-            # 'Themes' : themes,
-            'score': score,
-            'Popularity' : popularity,
-            'Members' : members,
-        }    
-        self.count += 1
-        
-        # Code dibwah untuk mengambil semua data manga (mengambil dari setiap page sampai sudah tidak ada page lagi)
-        # next_page = response.css("a.link-blue-box.next::attr(href)").get()
-        # if next_page is not None:
-        #     next_page_url = "https://myanimelist.net/topmanga.php"+next_page
-        #     yield response.follow(next_page_url, callback=self.parse)
+            # Jika ada halaman berikutnya, kita meminta Scrapy untuk mengikuti link tersebut dan memanggil metode parse kita untuk responsnya
+            next_page = response.css("a.link-blue-box.next::attr(href)").get()
+            if next_page is not None and self.counter < 1069:
+                next_page_url = response.urljoin(next_page)
+                yield response.follow(next_page_url, callback=self.parse)
+
+    # Metode parse_manga ini akan dipanggil oleh Scrapy untuk setiap respons yang diterima dari halaman detail manga
+    def parse_manga(self, response, **kwargs):
+        # Kita mengambil beberapa informasi tambahan tentang manga tersebut
+        synopsis = response.css('span[itemprop="description"]::text').get()
+        genres = response.css('span[itemprop="genre"]::text').getall()
+        authors_and_artists = response.css('span.information.studio.author a::text').getall()
+        # Kita membuat item yang berisi semua informasi yang telah kita kumpulkan tentang manga tersebut
+        item = {
+            'rank': response.meta['rank'],
+            'title': response.meta['title'],
+            'image': response.meta['image'],
+            'score': response.meta['score'],
+            'volume': response.meta['volume'],
+            'date': response.meta['date'],
+            'members': response.meta['members'],
+            'synopsis': synopsis,
+            'manga_link': response.meta['manga_link'],
+            'authors_and_artists': authors_and_artists,
+            'genres': genres,
+        }
+        # Kita memasukkan item tersebut ke dalam heap kita, dengan rank sebagai prioritas (sehingga item dengan rank tertinggi akan menjadi prioritas terendah)
+        heapq.heappush(self.results, (item['rank'], item))
+
+    # Metode closed ini akan dipanggil oleh Scrapy ketika spider ditutup
+    def closed(self, reason):
+        # Ketika spider ditutup, kita menulis hasil ke dalam file dalam urutan rank
+        with open('hasil.json', 'w') as f:
+            json.dump([item for rank, item in sorted(self.results)], f, indent=4)
+# scrapy crawl manga-spider
+#cd manga,cd manga, cd spiders
