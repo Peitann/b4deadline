@@ -1,3 +1,9 @@
+// Jumlah baris per halaman
+const rowsPerPage = 20;
+// Variabel untuk mengatur halaman saat ini
+let currentPage = 1;
+let products = [];
+
 // Ambil data dari file JSON
 fetch("tokopedia/laptop_gaming_tokopedia.json")
     .then(function(response) {
@@ -8,11 +14,14 @@ fetch("tokopedia/laptop_gaming_tokopedia.json")
         function displayProducts(products) {
             let placeholder = document.querySelector("#data-output");
             let out = "";
+            // Hitung nomor awal pada halaman saat ini
+            const startIndex = (currentPage - 1) * rowsPerPage + 1; 
             products.forEach((product, index) => {
                 const rating = product.rating ? `<i class="ri-star-fill star-icon"></i>${product.rating}` : "N/A";
+                const rowNumber = startIndex + index; // Hitung nomor pada baris saat ini
                 out += `
                 <tr>
-                    <td>${index + 1}</td>
+                    <td>${rowNumber}</td>
                     <td>${product.nama ?? "N/A"}</td>
                     <td>${product.harga ?? "N/A"}</td>
                     <td>${product.lokasi ?? "N/A"}</td>
@@ -25,8 +34,83 @@ fetch("tokopedia/laptop_gaming_tokopedia.json")
             placeholder.innerHTML = out;
         }
 
-        // Tampilkan data secara default (sebelum tombol diklik)
-        displayProducts(products);
+        // Jumlah baris per halaman
+        const rowsPerPage = 20;
+        // Variabel untuk mengatur halaman saat ini
+        let currentPage = 1;
+
+        // Fungsi untuk menampilkan data sesuai halaman saat ini
+        function displayCurrentPage(products) {
+            const startIndex = (currentPage - 1) * rowsPerPage;
+            const endIndex = startIndex + rowsPerPage;
+            const currentProducts = products.slice(startIndex, endIndex);
+            displayProducts(currentProducts);
+        }
+
+        // Fungsi untuk memperbarui navigasi halaman
+        function updatePagination(totalPages) {
+            const prevPageBtn = document.getElementById('prevPage');
+            const nextPageBtn = document.getElementById('nextPage');
+
+            prevPageBtn.disabled = currentPage === 1;
+            nextPageBtn.disabled = currentPage === totalPages;
+
+            const paginationBar = document.getElementById('paginationBar');
+            paginationBar.innerHTML = '';
+
+            for (let i = 1; i <= totalPages; i++) {
+                const pageBtn = document.createElement('button');
+                pageBtn.textContent = i;
+                pageBtn.addEventListener('click', () => {
+                    currentPage = i;
+                    displayPaginatedProducts(products);
+                });
+                if (i === currentPage) {
+                    pageBtn.classList.add('active');
+                }
+                paginationBar.appendChild(pageBtn);
+            }
+        }
+        
+
+        // Tambahkan event listener untuk tombol "Next"
+        const nextPageBtn = document.getElementById('nextPage');
+        nextPageBtn.addEventListener('click', function() {
+            currentPage++;
+            displayCurrentPage(products);
+        });
+
+        // Tambahkan event listener untuk tombol "Previous"
+        const prevPageBtn = document.getElementById('prevPage');
+        prevPageBtn.addEventListener('click', function() {
+            if (currentPage > 1) {
+                currentPage--;
+                displayCurrentPage(products);
+            }
+        });
+
+
+        // Tampilkan halaman pertama saat halaman dimuat
+        displayCurrentPage(products);
+
+        // Tambahkan event listener untuk tombol "Tampilkan Semua"
+        const showAllBtn = document.getElementById('showAllBtn');
+        showAllBtn.addEventListener('click', function() {
+            displayAllProducts(); // Panggil fungsi untuk menampilkan semua produk
+        });
+
+
+
+        // Fungsi untuk menampilkan semua data
+        function displayAllProducts() {
+            currentPage = 1; // Set halaman kembali ke 1
+            displayProducts(products); // Tampilkan semua data produk
+        }
+
+
+
+        // // Tampilkan data secara default (sebelum tombol diklik)
+        // displayProducts(products);
 
         // Pilih tombol "Daftar Laptop Gaming"
         const laptopButton = document.querySelector(".flex-container .sub-container:first-child");
@@ -44,6 +128,8 @@ fetch("tokopedia/laptop_gaming_tokopedia.json")
             document.querySelector(".tablescrap").style.display = "table";
             // Tampilkan search bar
             document.getElementById("searchWrapper").style.display = "flex";
+            // Tampilkan bar navigasi
+            document.getElementById("paginationBar").style.display = "block";
         });
 
         // Fungsi untuk menampilkan atau menyembunyikan pesan "Barang tidak ditemukan" berdasarkan hasil pencarian
@@ -59,13 +145,26 @@ fetch("tokopedia/laptop_gaming_tokopedia.json")
                 table.style.display = "table"; // Tampilkan kembali tabel
             }
         }
+
         // Fungsi untuk mencari laptop
         function search_laptop() {
             let input = document.getElementById('searchInput').value.toLowerCase();
             let filteredProducts = products.filter(product => product.nama.toLowerCase().includes(input));
-            displayProducts(filteredProducts);
+            currentPage = 1; // Set halaman kembali ke 1 setelah pencarian
+            displayProducts(filteredProducts); // Menampilkan hasil pencarian
             toggleNotFoundMessage(filteredProducts.length === 0); // Panggil fungsi toggleNotFoundMessage dengan parameter true jika hasil pencarian kosong
         }
+
+        // Fungsi untuk menampilkan data sesuai halaman saat ini dengan membaginya ke dalam halaman-halaman
+        function displayPaginatedProducts(products) {
+            const totalPages = Math.ceil(products.length / rowsPerPage); // Hitung total halaman berdasarkan jumlah produk dan jumlah baris per halaman
+            const startIndex = (currentPage - 1) * rowsPerPage;
+            const endIndex = startIndex + rowsPerPage;
+            const currentProducts = products.slice(startIndex, endIndex);
+            displayProducts(currentProducts);
+            updatePagination(totalPages); // Perbarui tampilan navigasi berdasarkan total halaman
+        }
+
 
         // Fungsi yang akan dipanggil saat tombol "Cari" ditekan
     function search() {

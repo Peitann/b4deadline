@@ -322,6 +322,10 @@ th:nth-child(7) {
 
 
 /* NAVIGATION BUTTON */
+#paginationBar {
+  display: none;
+}
+
 
 
 /* ICON */
