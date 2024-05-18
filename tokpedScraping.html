@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="./style/styleTokped.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
 
 
@@ -43,6 +44,7 @@
         </nav>
     </header>
     <div class="container mt-5">
+
         <div class="container B4XTokped">
         </div>
         <div class="container Header">
@@ -54,43 +56,59 @@
                 <div><button class="sub-container">Visualisasi Toko</button></div>
             </div>
             <div id="searchWrapper">
-                <input type="text"
+                <i class="fa fa-search"></i>
+                <input id="searchInput" type="text"
                     type="text"
-                    name="searchBar"
-                    id="searchBar"
                     placeholder="Search..."
                 />
             </div>
+            <div>
+            </div>
             <ul id="charactersList"></ul>
         </div>
-
-        <div class="tablescrap">
-            <table>
-                <thead>
-                    <tr>
-                        <!-- <th>No</th> masih perbaikan-->
-                        <th>Nama Produk</th>
-                        <th>Harga</th>
-                        <th>Lokasi</th>
-                        <th>Toko</th>
-                        <th>Rating</th>
-                        <th>Terjual</th>
-
-                    </tr>
-                </thead>
-                <tbody id="data-output">
-
-                </tbody>
-            </table>
+        <div class="container selimut">
+            <div class="container box-container">
+                <p id="welcomeHeader">WELCOME TO B4 TEAM SCRAP DATA!</p>
+                <p id="welcomeText">
+                    Website ini memperlihatkan hasil scraping dari website Tokopedia.com.
+                    Data yang diambil adalah data produk laptop dengan kata kunci "laptop gaming"
+                    menggunakan Scrapy Python. Data akan dilakukan cleansing dan disimpan dalam csv
+                    yang kemudian dikonversi menjadi format json. Data bisa dilihat dalam bentuk table 
+                    maupun visualisasi menggunakan apexChart.
+                </p>
+            </div>
         </div>
-        <div class="row">
+            <div class="tablescrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Produk</th>
+                            <th>Harga</th>
+                            <th>Lokasi</th>
+                            <th>Toko</th>
+                            <th>Rating</th>
+                            <th>Terjual</th>
+                        </tr>
+                    </thead>
+                    <tbody id="data-output">
+                        <!-- Data will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="notFoundMessage">Barang tidak ditemukan   :(</div>
+
+        <!-- <div class="row">
             <div class="col-md-12 text-center mt-4">
                 <button id="load-more-btn" class="btn btn-primary">Load More</button>
             </div>
-        </div>
+        </div> -->
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="./js/tokped_tabel.js"></script>
+    <script src="./js/Scrapping.js"></script>
 </body>
 </html>
