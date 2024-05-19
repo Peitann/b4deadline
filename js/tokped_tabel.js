@@ -45,6 +45,12 @@ fetch("tokopedia/laptop_gaming_tokopedia.json")
             const endIndex = startIndex + rowsPerPage;
             const currentProducts = products.slice(startIndex, endIndex);
             displayProducts(currentProducts);
+            // Sembunyikan tombol "Tampilkan Lebih Sedikit" jika jumlah data di halaman saat ini kurang dari atau sama dengan 20
+            if (currentProducts.length <= 20) {
+                document.getElementById('showLessBtn').style.display = 'none';
+            } else {
+                document.getElementById('showLessBtn').style.display = 'block';
+            }
         }
 
         // Fungsi untuk memperbarui navigasi halaman
@@ -99,7 +105,44 @@ fetch("tokopedia/laptop_gaming_tokopedia.json")
             displayAllProducts(); // Panggil fungsi untuk menampilkan semua produk
         });
 
+        // Set tombol "Tampilkan Lebih Sedikit" menjadi tersembunyi secara default
+        const showLessBtn = document.getElementById('showLessBtn');
+        showLessBtn.addEventListener('click', function() {
+            displayCurrentPage(products);
+            // Sembunyikan tombol "Tampilkan Lebih Sedikit" dan tampilkan tombol "Tampilkan Semua"
+            showLessBtn.style.display = 'none';
+            document.getElementById('showAllBtn').style.display = 'block';
+        });
 
+
+        // Setelah menampilkan semua produk, tambahkan logika untuk tombol "Tampilkan Lebih Sedikit"
+        showAllBtn.addEventListener('click', function() {
+            displayAllProducts(); // Panggil fungsi untuk menampilkan semua produk
+            // Periksa apakah semua produk ditampilkan
+            if (products.length > rowsPerPage) {
+                showLessBtn.style.display = 'block'; // Tampilkan tombol "Tampilkan Lebih Sedikit"
+            }
+            showAllBtn.style.display = 'none'; // Sembunyikan tombol "Tampilkan Semua"
+        });
+
+
+        // Fungsi untuk menampilkan pesan "Welcome" dan mengembalikan tabel ke tampilan awal
+        function displayWelcomeMessage() {
+            // Kembalikan variabel currentPage ke 1
+            currentPage = 1;
+            // Tampilkan kembali teks "Welcome" dan sembunyikan tabel serta pesan "Barang tidak ditemukan"
+            document.getElementById("welcomeHeader").style.display = "block";
+            document.getElementById("welcomeText").style.display = "block";
+            document.querySelector(".box-container").style.display = "block";
+            document.querySelector(".selimut").style.display = "block";
+            document.querySelector(".tablescrap").style.display = "none";
+            document.getElementById("notFoundMessage").style.display = "none";
+            // Tampilkan tombol "Tampilkan Semua" dan sembunyikan tombol "Tampilkan Lebih Sedikit"
+            document.getElementById('showAllBtn').style.display = 'block';
+            document.getElementById('showLessBtn').style.display = 'none';
+            // Perbarui navigasi halaman
+            updatePagination(Math.ceil(products.length / rowsPerPage));
+        }
 
         // Fungsi untuk menampilkan semua data
         function displayAllProducts() {
