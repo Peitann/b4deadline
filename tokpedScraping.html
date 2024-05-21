@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Display</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./style/styleTokped.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!--=============== NAV BAR ===============-->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="#" class="nav__logo">
+                Scraping <span>Tokopedia </span>B4
+            </a>
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="home.html" class="nav__link">Home</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="home.html#project" class="nav__link">Project</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="home.html#team" class="nav__link">About</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="index.html" class="nav__link">Logout</a>
+                    </li>
+                </ul>
+                <div class="nav__close" id="nav-close">
+                    <i class="ri-close-line"></i>
+                </div>
+            </div>
+            <div class="nav__toggle" id="nav-toggle">
+                <i class="ri-menu-line"></i>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container mt-5">
+        <div class="container B4XTokped"></div>
+        <div class="container Header">
+            <h2 id="ScrapHead">Scraping Data Laptop Website Tokopedia</h2>
+        </div>
+        <div class="container menu">
+            <div class="container flex-container">
+                <div><button class="sub-container" id="gamingLaptopsBtn">Daftar Laptop Gaming</button></div>
+                <div><button class="sub-container">Visualisasi Toko</button></div>
+            </div>
+            <div id="searchWrapper" style="display: none;">
+                <i class="fa fa-search"></i>
+                <input id="searchInput" type="text" placeholder="Cari Laptop..."/>
+            </div>
+            <ul id="charactersList"></ul>
+        </div>
+        <div class="container selimut">
+            <div class="container box-container">
+                <p id="welcomeHeader">WELCOME TO B4 TEAM SCRAP DATA!</p>
+                <p id="welcomeText">
+                    Website ini memperlihatkan hasil scraping dari website Tokopedia.com.
+                    Data yang diambil adalah data produk laptop dengan kata kunci "laptop gaming"
+                    menggunakan Scrapy Python. Data akan dilakukan cleansing dan disimpan dalam csv
+                    yang kemudian dikonversi menjadi format json. Data bisa dilihat dalam bentuk table 
+                    maupun visualisasi menggunakan apexChart.
+                </p>
+            </div>
+        </div>
+        <div class="tablescrap" style="display: none;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Produk</th>
+                        <th>
+                            <!-- Tombol sorting untuk kolom harga -->
+                            <div class="sort-button-container">
+                                <span>Harga</span>
+                                <button id="sortHarga" class="sort-button">
+                                    <i class="sort-icon ri-arrow-up-s-line"></i>
+                                </button>
+                            </div>
+                        </th>
+                        <th>Lokasi</th>
+                        <th>Toko</th>
+                        <th>
+                            <!-- Tombol sorting untuk kolom rating -->
+                            <div class="sort-button-container">
+                                <span>Rating</span>
+                                <button id="sortRating" class="sort-button">
+                                    <i class="sort-icon ri-arrow-up-s-line"></i>
+                                </button>
+                            </div>
+                        </th>
+                        <th>
+                            <!-- Tombol sorting untuk kolom terjual -->
+                            <div class="sort-button-container">
+                                <span>Terjual</span>
+                                <button id="sortTerjual" class="sort-button">
+                                    <i class="sort-icon ri-arrow-up-s-line"></i>
+                                </button>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="data-output">
+                    <!-- Data will be inserted here -->
+                </tbody>
+            </table>
+        </div>
+        <div id="notFoundMessage" style="display: none;">Barang tidak ditemukan :(</div>
+
+        <div class="pagination" id="paginationBar" style="display: none;">
+            <button id="prevPage">Previous</button>
+            <button id="nextPage">Next</button>
+            <button id="showAllBtn">Tampilkan Semua</button>
+            <button id="showLessBtn" style="display: none;">Tampilkan Lebih Sedikit</button>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./js/tokped_tabel.js"></script>
+    <script src="./js/Scrapping.js"></script>
+</body>
+</html>
