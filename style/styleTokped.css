@@ -367,6 +367,30 @@ button:active, a:active {
   outline: none;
 }
 
+/* CHART */
+.chart{
+  display: flex;
+  max-width: 900px;
+  height: 450px;
+  padding: 50px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.chart .chart_types{
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.chart .chart_types button{
+  background-color: #84C567;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+}
+
+
+
 
 /* ICON */
 .star-icon {
@@ -378,6 +402,7 @@ button:active, a:active {
   top: -3px; /* Posisikan sedikit ke atas */
 
 }
+
 
 
 
