@@ -7,53 +7,32 @@ from selenium.webdriver.common.by import By
 import pandas as pd
 import json
 
-
-#Yang perlu di donwload
-#pip install selenium
-#pip install beautifulsoup4
-#pip install pandas
-#jangan lupa install chromedriver dulu
-
-#inisiasi driverchrome
+# Inisiasi driver Chrome
 option = webdriver.ChromeOptions()
 option.add_experimental_option('excludeSwitches', ['enable-logging'])
 driver = webdriver.Chrome(options=option)
 
-#Link website yang ingin diambil datanya
-#note : kalau mau liat website yang diambil datanya, buka link ini di browser
-#       dan lihat elemen yang ingin diambil datanya
-#       https://www.tokopedia.com/search?anno_id_ram=1808&anno_id_rom=1821&navsource=&srp_component_id=04.06.00.00&srp_page_id=&srp_page_title=&st=&q=laptop%20gaming
-#       jangan search manual laptop gaming di tokopedia ntar gak sesuai sama yang lagi di scrap di program ini
-
-
-url = "https://www.tokopedia.com/search?anno_id_ram=1808&anno_id_rom=1821&navsource=&srp_component_id=04.06.00.00&srp_page_id=&srp_page_title=&st=&q=laptop%20gaming"
+# Link website yang ingin diambil datanya
+url = "https://www.tokopedia.com/search?navsource=&pmax=15000000&pmin=3000000&srp_component_id=04.06.00.00&srp_page_id=&srp_page_title=&st=&q=laptop%20gaming"
 driver.get(url)
 
-#Kalau internetnya gacor plus laptop gacor timesleep nya ubah aja ke 1 detik
-
 data = []
+seen = set()  # Set to track seen products
 
-#ubah range nya kalau mau ambil lebih banyak data misal 3 maka bakal ngambil 3 halaman
-for halaman in range(20):
-    #Buat nunggu website dimuat dulu
-    WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.CSS_SELECTOR, '#zeus-root')))
+# Ubah range-nya kalau mau ambil lebih banyak data
+for halaman in range(60):
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, '#zeus-root')))
     time.sleep(2)
 
-    #buat ngescroll
     for scroll in range(25):
         driver.execute_script("window.scrollBy(0, 250);")
-        time.sleep(2)
+        time.sleep(1)
     driver.execute_script("window.scrollTo(50, 0);")
-    time.sleep(2)
+    time.sleep(1)
 
-    #mengambil data html website
     soup = BeautifulSoup(driver.page_source, 'html.parser')
 
-    #buat test aja
-    #print(soup)
-
-    #mengambil data yang diinginkan
-    counter = 1
+    # Mengambil data yang diinginkan
     for laptop in soup.find_all('div', class_='css-1asz3by'):
         nama = laptop.find('div', class_='prd_link-product-name css-3um8ox')
         harga = laptop.find('div', class_='prd_link-product-price css-h66vau')
@@ -62,36 +41,55 @@ for halaman in range(20):
         rating = laptop.find('span', class_='prd_rating-average-text css-t70v7i')
         terjual = laptop.find('span', class_='prd_label-integrity css-1sgek4h')
 
-       # Kondisi untuk menghindari produk dengan nama mengandung "baterai"
+        # Kondisi untuk menghindari produk dengan nama mengandung "baterai"
         if nama and "baterai" not in nama.text.lower():
-            print(f"{counter}. {nama.text if nama else ''}")
-            print(f"Harga: {harga.text if harga else ''}")
-            if lokasi:
-                print(f"Lokasi: {lokasi.text}")
-            if toko:
-                print(f"Toko: {toko.text}")
-            if rating:
-                print(f"Rating: {rating.text}")
-            if terjual:
-                print(f"Terjual: {terjual.text}")
-            print("\n")
-            counter += 1
+            product_id = f"{nama.text}-{harga.text}"  # Create a unique identifier for each product
+            if product_id not in seen:
+                seen.add(product_id)  # Add to seen set to avoid duplicates
 
-            # Menambahkan data ke dictionary data
-            data.append({
-                'nama': nama.text if nama else None,
-                'harga': harga.text if harga else None,
-                'lokasi': lokasi.text if lokasi else None,
-                'toko': toko.text if toko else None,
-                'rating': rating.text if rating else None,
-                'terjual': terjual.text if terjual else None
-            })
+                print(f"{nama.text if nama else ''}")
+                print(f"Harga: {harga.text if harga else ''}")
+                if lokasi:
+                    print(f"Lokasi: {lokasi.text}")
+                if toko:
+                    print(f"Toko: {toko.text}")
+                if rating:
+                    print(f"Rating: {rating.text}")
+                if terjual:
+                    print(f"Terjual: {terjual.text}")
+                print("\n")
+
+                # Hanya tambahkan data jika semua field ada isinya
+                if nama and harga and lokasi and toko and rating and terjual:
+                    data.append({
+                        'nama': nama.text,
+                        'harga': harga.text,
+                        'lokasi': lokasi.text,
+                        'toko': toko.text,
+                        'rating': rating.text,
+                        'terjual': terjual.text
+                    })
     time.sleep(2)
-    driver.find_element(By.CSS_SELECTOR, 'button[aria-label="Laman berikutnya"]').click()
+
+    # Penanganan kesalahan saat mencari tombol "Laman berikutnya"
+    try:
+        next_button = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, 'button[aria-label="Laman berikutnya"]'))
+        )
+        if next_button.is_enabled():
+            next_button.click()
+        else:
+            break
+    except:
+        break
     time.sleep(2)
 
 #mengubah data ke csv
 df = pd.DataFrame(data, columns=['nama', 'harga', 'lokasi', 'toko', 'rating', 'terjual'])
+
+# Menghapus baris yang memiliki nilai NaN (kosong)
+df.dropna(inplace=True)
+
 df.to_csv('laptop_gaming_tokopedia.csv', index=False, sep=';')
 
 #mengubah data ke json

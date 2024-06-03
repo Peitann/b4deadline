@@ -1,0 +1,539 @@
+html {
+  scroll-behavior: smooth;
+}
+ul {
+  list-style: none;
+}
+body {
+  font-family: 'Lato', sans-serif;
+  background-color: #ffffff;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+
+  }
+   @keyframes fadeIn {
+      0% {opacity: 0;}
+      100% {opacity: 1;}
+  }
+
+  /*=============== NAV BAR ===============*/
+:root{
+  --header-height:3.5rem;
+  --hue: 162;
+  --first-color: hsl(var(--hue), 100%, 40%);
+  --first-color-alt: hsl(var(--hue), 56%, 35%);
+  --title-color: hsl(228, 8%, 95%);
+  --text-color: hsl(228, 8%, 65%);
+  --body-color: hsl(228, 15%, 20%);
+  --container-color: hsl(228, 15%, 15%);
+
+  /*========== Font and typography ==========*/
+  /*.5rem = 8px | 1rem = 16px ...*/
+  --body-font: "Poppins", sans-serif;
+  --biggest-font-size: 2rem;
+  --bigger-font-size: 1.25rem;
+  --h1-font-size: 1.5rem;
+  --h2-font-size: 1.25rem;
+  --h3-font-size: 1rem;
+  --normal-font-size: .938rem;
+  --small-font-size: .813rem;
+  --smaller-font-size: .75rem;
+
+  /*========== Font weight ==========*/
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semi-bold: 600;
+
+  /*========== z index ==========*/
+  --z-tooltip: 10;
+  --z-fixed: 100;
+}
+.header{
+  position: fixed;
+  width: 100%;
+  background-color: var(--container-color);
+  top: 0;
+  left: 0;
+  z-index: var(--z-fixed);
+}
+
+.nav{
+  height: var(--header-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav__logo  {
+  color: var(--title-color);
+  font-weight: var(--font-medium);
+  padding-left: 1%;
+  text-decoration: none;
+    transition: color .4s;
+}
+
+.nav__logo span{
+  color: var(--first-color);
+}
+
+.nav__toggle,
+.nav__close{
+  display: flex;
+  padding-right: 3%;
+  font-size: 1.25rem;
+  color: var(--title-color);
+  cursor: pointer;
+}
+
+.B4XTokped {
+  background-image: url('../img/B4 X tokopedia (1).png');
+  background-size: 685px 116px; /* Menyesuaikan ukuran gambar dengan ukuran container */
+  background-position: center; /* Memposisikan gambar ke tengah */
+  margin-top: 8%;
+  margin-bottom: 2%;
+  /* Opsional: Menentukan tinggi dan lebar container untuk sesuaikan gambar */
+  width: 685px;
+  height: 116px;
+}
+
+.h2Judul {
+  
+  font-size: 10rem;
+  font-weight: 600;
+  color: #333333;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+/* Container Header */
+.Header {
+  padding: 20px; /* Padding di dalam container */
+  text-align: center; /* Pusatkan teks di dalam container */
+  margin-top: 20px; /* Jarak dari elemen di atas */
+}
+
+/* Gaya tulisan di dalam Header */
+#ScrapHead {
+  font-family: 'Lato', sans-serif;
+ /* Font yang digunakan */
+  font-size: 2rem; /* Ukuran font */
+  color: #565656; /* Warna teks */
+  font-weight: bold; /* Ketebalan font */
+  margin: 0; /* Hilangkan margin default */
+}
+
+
+/* MENU */
+.menu {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  margin-right: auto;
+}
+
+
+/* Flex container to align sub-containers in one row */
+.flex-container {
+  background-color: #A7F783;
+  display: flex; /* Tetap menggunakan flexbox */
+  align-items: center; /* Menengahkan elemen secara vertikal */
+  gap: 0px; /* Jarak antar elemen */
+  margin-left: 0px;
+  margin-right: 15px;
+  border-radius: 20px;
+  width: 290px;
+  padding-left: 5px;
+  padding-right: 5px;
+  height: 55px;
+  justify-content: center;
+  
+}
+
+/* Style for individual sub-containers */
+.sub-container {
+  background-color: #84C567;
+  font-family: 'Lato', sans-serif;
+  padding: 10px; 
+  border-radius: 10px; 
+  flex: 1 1 30%; 
+  margin-left: 5px;
+  margin-right: 5px;
+  text-align: center;
+  font-size: 13px;
+  color: white;
+  border: 0px;
+  justify-content: center;
+}
+
+.sub-container:hover{
+  background-color: #DCFCCD;
+  color: #565656;
+}
+
+.sub-container:active {
+  outline: none;
+  border-color: transparent;
+  border: 0px;
+}
+
+/* KOLOM SEARCH */
+#searchWrapper {
+  display: none;
+  align-items: center;
+  border-radius: 30px;
+  margin-right: 10px; /* Jarak dari elemen sebelah kanan */
+  font-size: 13px;
+  color: white;
+  border: 1px solid #818181; /* Warna border default */
+  width: 200px; /* Lebar yang lebih besar untuk kolom pencarian */
+  padding-left: 10px; /* Menambahkan padding kiri untuk ruang ikon */
+}
+
+#searchWrapper .fa-search {
+  margin-right: 10px; /* Jarak antara ikon dan input */
+  color: #818181; /* Warna ikon */
+}
+
+#searchWrapper:focus-within {
+  border: 3px solid #84C567; /* Warna border saat input aktif */
+}
+
+#searchInput {
+  border: none;
+  height: 30px;
+  outline: none;
+}
+
+.fa.fa-search {
+  font-size: 15px;
+}
+
+#notFoundMessage {
+  display: none;
+  font-family: 'Lato', sans-serif;
+  /* Font yang digunakan */
+   font-size: 30px; /* Ukuran font */
+   color: #bdbdbd; /* Warna teks */
+   font-weight: bold; /* Ketebalan font */
+   margin: 20px 0; /* Hilangkan margin default */
+   text-align: center;
+}
+
+
+/* WELCOME TEXT */
+
+.selimut {
+  background-color: #A7F783;
+  border-radius: 25px;
+  width: 100%;
+  display: flex; /* Menjadikan .selimut sebagai flex container */
+  padding: 5px; /* Menambahkan padding atas dan bawah untuk menjaga jarak */
+  justify-content: center;
+}
+
+.box-container {
+  background-color: #84C567;
+  padding: 20px; /* Sesuaikan padding sesuai kebutuhan */
+  color: white;
+  border-radius: 18px;
+  width: 100%;
+  margin: 5px; /* Atur jarak atas dari .selimut */
+}
+
+#welcomeHeader{
+  font-family: 'Lato', sans-serif;
+  font-size: 3rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+  padding-top: 1px;
+}
+
+#welcomeText{
+  font-family: 'Lato', sans-serif;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  white-space: pre-line;
+  text-align: center;
+}
+
+
+/*TABLE LIST LAPTOP GAMING*/
+
+.tablescrap{
+  display: none;
+}
+table {
+  width: 100%;
+  margin: 10px 0;
+  border-collapse: collapse;
+  table-layout: fixed; /* Tambahkan ini untuk menetapkan lebar kolom tetap */
+}
+
+table th, table td {
+  padding: 10px;
+  border: 1px solid #d4d4d4;
+  text-align: center;
+  overflow: hidden; /* Pastikan konten yang terlalu panjang tidak mempengaruhi tata letak */
+  white-space: normal !important;
+  word-wrap: break-word; /* Memungkinkan teks panjang dibungkus */
+}
+
+table th {
+  background-color: #DCFCCD;
+  color: #585858;
+}
+
+table td {
+  background-color: #fff;
+  height: 80px;
+}
+
+table th:nth-child(1), table td:nth-child(1) {
+  width: 10%; /* Sesuaikan lebar kolom pertama */
+}
+
+table th:nth-child(2), table td:nth-child(2) {
+  width: 50%; /* Sesuaikan lebar kolom kedua (nama laptop gaming) */
+}
+
+table th:nth-child(3), table td:nth-child(3) {
+  width: 15%; /* Sesuaikan lebar kolom ketiga */
+}
+
+table th:nth-child(4), table td:nth-child(4) {
+  width: 15%; /* Sesuaikan lebar kolom keempat */
+}
+
+th:nth-child(5) {
+  width: 20%; /* Lebar kolom Toko */
+}
+
+th:nth-child(6) {
+  width: 10%; /* Lebar kolom Rating */
+}
+
+th:nth-child(7) {
+  width: 10%; /* Lebar kolom Terjual */
+}
+
+
+/* NAVIGATION BUTTON */
+#paginationBar {
+  display: none;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.pagination button {
+  background-color: #84C567;
+  color: white;
+  border: none;
+  padding: 10px 20px; /* Sesuaikan padding */
+  margin: 5px; /* Tambahkan margin */
+  font-size: 1rem; /* Sesuaikan ukuran font */
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pagination button:hover {
+  background-color: #DCFCCD;
+  color: #565656;
+}
+
+.pagination .active {
+  background-color: #565656;
+  color: white;
+}
+
+button, a {
+  outline: none;
+}
+
+button:focus, a:focus {
+  outline: none;
+}
+
+button:active, a:active {
+  outline: none;
+}
+
+/* CHART */
+.chart{
+  display: flex;
+  max-width: 900px;
+  height: 450px;
+  padding: 50px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.chart .chart_types{
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.chart .chart_types button{
+  background-color: #84C567;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+}
+
+
+
+
+/* ICON */
+.star-icon {
+  color: gold; /* Warna bintang */
+  margin-right: 3px; /* Jarak antara bintang dan rating */
+  font-size: 1.2rem; /* Ukuran bintang, sesuaikan sesuai kebutuhan */
+  vertical-align: middle; /* Menyelaraskan bintang dengan teks */
+  position: relative;
+  top: -3px; /* Posisikan sedikit ke atas */
+
+}
+
+
+
+
+
+@media screen and (min-width: 1023px){
+  .nav__menu {
+      position: fixed;
+      top: 0;
+      right: -100%; /* Ubah dari -100 menjadi -100% */
+      background-color: hsla(0, 0%, 10%, .3);
+      width: 75%;
+      height: 100%;
+      padding: 4.5rem 0 0 3rem;
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      transition: right .4s;
+  }
+}
+
+
+.nav__list{
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.nav__link{
+  color: var(--title-color);
+  font-weight: var(--font-medium);
+  transition: color .4s;
+}
+
+.nav__link:hover{
+  color: var(--first-color);
+}
+
+.nav__close{
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+}
+
+.show-menu{
+  right: 0; /* Ubah dari 0 menjadi 0% */
+}
+
+/*=============== NAV BAR ===============*/
+
+.header{
+  position: fixed;
+  width: 100%;
+  background-color: var(--container-color);
+  top: 0;
+  left: 0;
+  z-index: var(--z-fixed);
+}
+
+.nav{
+  height: var(--header-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav__logo  {
+  color: var(--title-color);
+  font-weight: var(--font-medium);
+  padding-left: 3%;
+  text-decoration: none;
+  transition: color .4s;
+}
+
+.nav__logo:hover{
+  color: var(--first-color);
+  text-decoration: none;
+}
+
+.nav__logo span{
+  color: var(--first-color);
+}
+
+.nav__toggle,
+.nav__close{
+  display: flex;
+  font-size: 1.25rem;
+  color: var(--title-color);
+  cursor: pointer;
+}
+
+
+
+@media screen and (min-width: 1023px){
+  .nav__menu {
+      position: fixed;
+      top: 0;
+      right: -100%; /* Ubah dari -100 menjadi -100% */
+      background-color: hsla(0, 0%, 10%, .3);
+      width: 50%;
+      height: 100%;
+      padding: 4.5rem 0 0 3rem;
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      transition: right .4s;
+  }
+}
+
+
+.nav__list{
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.nav__link{
+  color: var(--title-color);
+  font-weight: var(--font-medium);
+  transition: color .4s;
+  text-decoration: none;
+}
+
+.nav__link:hover{
+  color: var(--first-color);
+  text-decoration: none;
+}
+
+.nav__close{
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+}
+
+.show-menu{
+  right: 0; /* Ubah dari 0 menjadi 0% */
+}
