@@ -1,14 +1,44 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Function to create the chart
-    function createChart(data, type) {
+    function createChart(data) {
         const ctx = document.getElementById('myChart').getContext('2d');
+
+        // Calculate a weighted rating for each store based on rating and sales
+        const stores = data.map(item => ({
+            toko: item.toko,
+            rating: item.rating,
+            sales: parseTerjual(item.terjual)
+        }));
+
+        const storeRatings = {};
+        stores.forEach(store => {
+            if (!storeRatings[store.toko]) {
+                storeRatings[store.toko] = { rating: 0, sales: 0, count: 0 };
+            }
+            storeRatings[store.toko].rating += store.rating * store.sales;
+            storeRatings[store.toko].sales += store.sales;
+            storeRatings[store.toko].count += 1;
+        });
+
+        const weightedRatings = Object.keys(storeRatings).map(toko => ({
+            toko,
+            weightedRating: storeRatings[toko].rating / storeRatings[toko].sales,
+            sales: storeRatings[toko].sales
+        }));
+
+        weightedRatings.sort((a, b) => b.weightedRating - a.weightedRating);
+
+        const topStores = weightedRatings.slice(0, 10);
+
         new Chart(ctx, {
-            type: type,
+            type: 'bar',
             data: {
-                labels: data.map(row => row.toko),
+                labels: topStores.map(store => store.toko),
                 datasets: [{
                     label: 'Rating Toko',
-                    data: data.map(row => row.rating),
+                    data: topStores.map(store => store.weightedRating),
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 1
                 }]
             },
@@ -29,19 +59,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const locations = {};
         data.forEach(function(item) {
+            const sales = parseTerjual(item.terjual);
             if (item.lokasi !== null && item.lokasi !== undefined) {
                 if (!locations[item.lokasi]) {
                     locations[item.lokasi] = 0;
                 }
-                locations[item.lokasi]++;
+                locations[item.lokasi] += sales;
             }
         });
 
+        const sortedLocations = Object.keys(locations)
+            .map(location => ({ location, sales: locations[location] }))
+            .sort((a, b) => b.sales - a.sales)
+            .slice(0, 10); // Ensure the top 10 locations are taken
+
         const locationChartData = {
-            labels: Object.keys(locations),
+            labels: sortedLocations.map(item => item.location),
             datasets: [{
                 label: 'Jumlah Penjualan Berdasarkan Lokasi',
-                data: Object.values(locations),
+                data: sortedLocations.map(item => item.sales),
                 backgroundColor: 'rgba(54, 162, 235, 0.2)',
                 borderColor: 'rgba(54, 162, 235, 1)',
                 borderWidth: 1
@@ -52,8 +88,9 @@ document.addEventListener('DOMContentLoaded', function() {
             type: 'bar',
             data: locationChartData,
             options: {
+                indexAxis: 'y',  // This makes the chart horizontal
                 scales: {
-                    y: {
+                    x: {
                         beginAtZero: true
                     }
                 },
@@ -80,20 +117,29 @@ document.addEventListener('DOMContentLoaded', function() {
             datasets: [{
                 label: 'Jumlah Penjualan Berdasarkan Merek',
                 data: Object.values(brands),
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                borderColor: 'rgba(255, 99, 132, 1)',
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
                 borderWidth: 1
             }]
         };
         new Chart(ctx, {
-            type: 'bar',
+            type: 'pie',
             data: brandChartData,
             options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                },
                 maintainAspectRatio: false
             }
         });
@@ -109,9 +155,20 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         if (!foundBrand) {
-            foundBrand = 'Unknown';
+            foundBrand = 'Lainnya';
         }
         return foundBrand;
+    }
+
+    // Function to parse "terjual" field
+    function parseTerjual(terjual) {
+        if (terjual.includes('rb+')) {
+            return parseInt(terjual.replace('rb+ terjual', '')) * 1000;
+        } else if (terjual.includes('+')) {
+            return parseInt(terjual.replace('+ terjual', ''));
+        } else {
+            return parseInt(terjual.replace(' terjual', ''));
+        }
     }
 
     // Function to fetch data and create the chart
@@ -124,7 +181,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 throw new Error('Failed to load');
             })
             .then(function(data) {
-                createChart(data, 'bar');
+                createChart(data);
             })
             .catch(function(error) {
                 console.error('Error fetching the JSON data for the chart:', error);
@@ -165,6 +222,83 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
+    function createAuthorizedChart(data) {
+        const ctx = document.getElementById('authorizedChart').getContext('2d');
+
+        const officialSales = {};
+        const unofficialSales = {};
+
+        data.forEach(function(item) {
+            const sales = parseTerjual(item.terjual);
+            if (item.lokasi) {
+                if (item.toko && (item.toko.toLowerCase().includes('authorized') || item.toko.toLowerCase().includes('official'))) {
+                    if (!officialSales[item.lokasi]) {
+                        officialSales[item.lokasi] = 0;
+                    }
+                    officialSales[item.lokasi] += sales;
+                } else {
+                    if (!unofficialSales[item.lokasi]) {
+                        unofficialSales[item.lokasi] = 0;
+                    }
+                    unofficialSales[item.lokasi] += sales;
+                }
+            }
+        });
+
+        const filteredLocations = Object.keys(officialSales)
+            .filter(location => officialSales[location] > 100)
+            .sort((a, b) => officialSales[b] - officialSales[a])
+            .slice(0, 10);
+
+        const filteredOfficialSales = filteredLocations.map(location => officialSales[location]);
+        const filteredUnofficialSales = filteredLocations.map(location => unofficialSales[location]);
+
+        const chartData = {
+            labels: filteredLocations,
+            datasets: [{
+                label: 'Toko Official',
+                data: filteredOfficialSales,
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }, {
+                label: 'Toko Non-Official',
+                data: filteredUnofficialSales,
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        new Chart(ctx, {
+            type: 'line',
+            data: chartData,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                maintainAspectRatio: false
+            }
+        });
+    }
+
+    // Function to fetch data and create the chart
+    function fetchDataAndCreateAuthorizedChart() {
+        fetch("tokopedia/laptop_gaming_tokopedia.json")
+            .then(function(response) {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error('Failed to load');
+            })
+            .then(function(data) {
+                createAuthorizedChart(data);
+            })
+            .catch(function(error) {
+                console.error('Error fetching the JSON data for the authorized chart:', error);
+            });
+    }
+
     // Event listener for the "Visualisasi Toko" button
     document.getElementById('visualisasiTokoBtn').addEventListener('click', function() {
         // Menyembunyikan pesan selamat datang
@@ -177,16 +311,12 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('myChart').style.display = 'block';
         document.getElementById('locationChart').style.display = 'block';
         document.getElementById('brandChart').style.display = 'block';
+        document.getElementById('authorizedChart').style.display = 'block';
         
         // Fetch data and create charts
         fetchDataAndCreateChart();
         fetchDataLocationNCreateChart();
-        fetchDataNCreateBrandChart(); // Call the function to create chart based on brand data
+        fetchDataNCreateBrandChart();
+        fetchDataAndCreateAuthorizedChart();
     });
 });
-
-
-
-
-
-        

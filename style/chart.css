@@ -29,3 +29,7 @@ body {
   max-width: 650px; /* Maksimum lebar chart untuk mengontrol ukuran */
   margin: 35px auto; /* Pusatkan chart di tengah halaman */
 }
+
+.filter-container {
+    display: none;
+}
