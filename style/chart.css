@@ -1,0 +1,35 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+body {
+  font-family: Roboto, sans-serif;
+}
+
+#myChart {
+  width: 100%; /* Mengatur lebar chart agar responsif */
+  max-width: 650px; /* Maksimum lebar chart untuk mengontrol ukuran */
+  margin: 35px auto; /* Pusatkan chart di tengah halaman */
+}
+/* Gaya untuk chart yang sudah ada */
+.container.chart {
+  width: 100%;
+  max-width: 650px;
+  margin: 35px auto;
+}
+
+/* Gaya untuk chart baru berdasarkan lokasi */
+#locationChart {
+  width: 100%; /* Mengatur lebar chart agar responsif */
+  max-width: 650px; /* Maksimum lebar chart untuk mengontrol ukuran */
+  margin: 35px auto; /* Pusatkan chart di tengah halaman */
+}
+
+/* Gaya untuk chart merek */
+#brandChart {
+  width: 100%; /* Mengatur lebar chart agar responsif */
+  max-width: 650px; /* Maksimum lebar chart untuk mengontrol ukuran */
+  margin: 35px auto; /* Pusatkan chart di tengah halaman */
+}
+
+.filter-container {
+    display: none;
+}

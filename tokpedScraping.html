@@ -50,7 +50,7 @@
         <div class="container menu">
             <div class="container flex-container">
                 <div><button class="sub-container" id="gamingLaptopsBtn">Daftar Laptop Gaming</button></div>
-                <div><button class="sub-container">Visualisasi Toko</button></div>
+                <div><button class="sub-container" id="visualisasiTokoBtn">Visualisasi Toko</button></div>
             </div>
             <div id="searchWrapper" style="display: none;">
                 <i class="fa fa-search"></i>
@@ -120,10 +120,22 @@
             <button id="showAllBtn">Tampilkan Semua</button>
             <button id="showLessBtn" style="display: none;">Tampilkan Lebih Sedikit</button>
         </div>
+
+        <div class="container chart">
+            <canvas id="myChart"></canvas>
+        </div>
+        <div class="container chart">
+            <canvas id="locationChart"></canvas>
+        </div>
+        <div class="container chart">
+            <canvas id="brandChart"></canvas>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="./js/tokped_tabel.js"></script>
     <script src="./js/Scrapping.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./js/chart.js"></script>
 </body>
 </html>
