@@ -165,6 +165,72 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
+    function createAuthorizedChart(data) {
+        const ctx = document.getElementById('authorizedChart').getContext('2d');
+      
+        const officialSales = {};
+        const unofficialSales = {};
+      
+        data.forEach(function(item) {
+          if (item.toko && item.toko.includes('Authorized')) {
+            if (!officialSales[item.lokasi]) {
+              officialSales[item.lokasi] = 0;
+            }
+            officialSales[item.lokasi] += parseInt(item.terjual.replace(' terjual', ''));
+          } else {
+            if (!unofficialSales[item.lokasi]) {
+              unofficialSales[item.lokasi] = 0;
+            }
+            unofficialSales[item.lokasi] += parseInt(item.terjual.replace(' terjual', ''));
+          }
+        });
+      
+        const chartData = {
+          labels: Object.keys(officialSales),
+          datasets: [{
+            label: 'Toko Official',
+            data: Object.values(officialSales),
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1
+          }, {
+            label: 'Toko Non-Official',
+            data: Object.values(unofficialSales),
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1
+          }]
+        };
+      
+        new Chart(ctx, {
+          type: 'line',
+          data: chartData,
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            },
+            maintainAspectRatio: false
+          }
+        });
+      }
+      
+      // Function to fetch data and create the chart
+      function fetchDataAndCreateAuthorizedChart() {
+        fetch("tokopedia/laptop_gaming_tokopedia.json")
+         .then(function(response) {
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error('Failed to load');
+          })
+         .then(function(data) {
+            createAuthorizedChart(data);
+          })
+         .catch(function(error) {
+            console.error('Error fetching the JSON data for the authorized chart:', error);
+          });
+      }
+
     // Event listener for the "Visualisasi Toko" button
     document.getElementById('visualisasiTokoBtn').addEventListener('click', function() {
         // Menyembunyikan pesan selamat datang
@@ -177,10 +243,12 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('myChart').style.display = 'block';
         document.getElementById('locationChart').style.display = 'block';
         document.getElementById('brandChart').style.display = 'block';
+        document.getElementById('authorizedChart').style.display = 'block';
         
         // Fetch data and create charts
         fetchDataAndCreateChart();
         fetchDataLocationNCreateChart();
         fetchDataNCreateBrandChart(); // Call the function to create chart based on brand data
+        fetchDataAndCreateAuthorizedChart();
     });
 });
