@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const sortedLocations = Object.keys(locations)
             .map(location => ({ location, sales: locations[location] }))
             .sort((a, b) => b.sales - a.sales)
-            .slice(0, 10);
+            .slice(0, 10); // Ensure the top 10 locations are taken
 
         const locationChartData = {
             labels: sortedLocations.map(item => item.location),
@@ -88,8 +88,9 @@ document.addEventListener('DOMContentLoaded', function() {
             type: 'bar',
             data: locationChartData,
             options: {
+                indexAxis: 'y',  // This makes the chart horizontal
                 scales: {
-                    y: {
+                    x: {
                         beginAtZero: true
                     }
                 },
@@ -116,20 +117,29 @@ document.addEventListener('DOMContentLoaded', function() {
             datasets: [{
                 label: 'Jumlah Penjualan Berdasarkan Merek',
                 data: Object.values(brands),
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                borderColor: 'rgba(255, 99, 132, 1)',
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
                 borderWidth: 1
             }]
         };
         new Chart(ctx, {
-            type: 'bar',
+            type: 'pie',
             data: brandChartData,
             options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                },
                 maintainAspectRatio: false
             }
         });
@@ -145,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         if (!foundBrand) {
-            foundBrand = 'Unknown';
+            foundBrand = 'Lainnya';
         }
         return foundBrand;
     }
@@ -171,7 +181,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 throw new Error('Failed to load');
             })
             .then(function(data) {
-                createChart(data, 'bar');
+                createChart(data);
             })
             .catch(function(error) {
                 console.error('Error fetching the JSON data for the chart:', error);
