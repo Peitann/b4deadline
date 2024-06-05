@@ -330,3 +330,55 @@ document.addEventListener('DOMContentLoaded', function() {
         fetchDataAndCreateAuthorizedChart();
     });
 });
+/*Program untuk menampilkan dashboard*/
+fetch('tokopedia/laptop_gaming_tokopedia.json')
+    .then(response => response.json())
+    .then(data => {
+        // Extract total data
+        let totalData = data.length;
+
+        // Calculate the most popular brand
+        let brandSales = {};
+        data.forEach(item => {
+            let brand = item.nama.split(' ')[0];  // Assuming brand is the first word in the name
+            if (brandSales[brand]) {
+                brandSales[brand] += parseInt(item.terjual.replace(/\D/g, '')) || 0;
+            } else {
+                brandSales[brand] = parseInt(item.terjual.replace(/\D/g, '')) || 0;
+            }
+        });
+        let mostPopularBrand = Object.keys(brandSales).reduce((a, b) => brandSales[a] > brandSales[b] ? a : b);
+
+        // Calculate the most popular store
+        let storeSales = {};
+        data.forEach(item => {
+            if (item.toko) {
+                if (storeSales[item.toko]) {
+                    storeSales[item.toko] += parseInt(item.terjual.replace(/\D/g, '')) || 0;
+                } else {
+                    storeSales[item.toko] = parseInt(item.terjual.replace(/\D/g, '')) || 0;
+                }
+            }
+        });
+        let mostPopularStore = Object.keys(storeSales).reduce((a, b) => storeSales[a] > storeSales[b] ? a : b);
+
+        // Calculate the region with the most sales
+        let regionSales = {};
+        data.forEach(item => {
+            if (item.lokasi) {
+                if (regionSales[item.lokasi]) {
+                    regionSales[item.lokasi] += parseInt(item.terjual.replace(/\D/g, '')) || 0;
+                } else {
+                    regionSales[item.lokasi] = parseInt(item.terjual.replace(/\D/g, '')) || 0;
+                }
+            }
+        });
+        let mostSalesRegion = Object.keys(regionSales).reduce((a, b) => regionSales[a] > regionSales[b] ? a : b);
+
+        // Update the dashboard
+        document.getElementById('totalData').innerText = totalData;
+        document.getElementById('mostPopularBrand').innerText = mostPopularBrand;
+        document.getElementById('mostPopularStore').innerText = mostPopularStore;
+        document.getElementById('mostSalesRegion').innerText = mostSalesRegion;
+    })
+    .catch(error => console.error('Error fetching JSON:', error));
