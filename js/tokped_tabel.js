@@ -203,6 +203,24 @@ fetch("tokopedia/laptop_gaming_tokopedia.json")
             document.getElementById("searchWrapper").style.display = "flex";
             // Tampilkan bar navigasi
             document.getElementById("paginationBar").style.display = "block";
+            // Show the charts
+            document.getElementById('myChart').style.display = 'none';
+            document.getElementById('locationChart').style.display = 'none';
+            document.getElementById('brandChart').style.display = 'none';
+            document.getElementById('authorizedChart').style.display = 'none';
+
+            // Menampilkan heading untuk masing-masing chart
+            document.getElementById('myChartHeading').style.display = 'none';
+            document.getElementById('locationChartHeading').style.display = 'none';
+            document.getElementById('brandChartHeading').style.display = 'none';
+            document.getElementById('authorizedChartHeading').style.display = 'none';
+
+            // menampilkan dashboard
+            document.getElementById('totalDataBox').style.display = 'none';
+            document.getElementById('mostPopularBrandBox').style.display = 'none';
+            document.getElementById('mostPopularStoreBox').style.display = 'none';
+            document.getElementById('mostSalesRegionBox').style.display = 'none';
+            
         });
 
         // Fungsi untuk menampilkan atau menyembunyikan pesan "Barang tidak ditemukan" berdasarkan hasil pencarian
