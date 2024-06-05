@@ -543,3 +543,94 @@ button:active, a:active {
 .sort-button-container span {
   margin-right: 5px;
 }
+/* Program untuk menampilkan dashboard css*/
+.dashboard {
+    display: flex;
+    gap: 70px; /* Adjust this value to change the spacing between boxes */
+    flex-wrap: nowrap; /* Prevent wrapping */
+    max-width: 100%; /* Ensure it doesn't overflow the viewport */
+    overflow-x: auto; /* Allow horizontal scrolling if necessary */
+    padding: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    background-color: #fff;
+}
+
+.box {
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    min-width: 200px; /* Ensure the boxes have a minimum width */
+    transition: transform 0.3s, box-shadow 0.3s;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+
+.box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    z-index: -1;
+    filter: blur(20px);
+    transform: scale(1.2);
+}
+
+.box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+}
+
+.box h3 {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.box p {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* Different colors for each box */
+#totalDataBox {
+    background: linear-gradient(135deg, #56CCF2, #2F80ED);
+}
+
+#mostPopularBrandBox {
+    background: linear-gradient(135deg, #FF5F6D, #FFC371);
+}
+
+#mostPopularStoreBox {
+    background: linear-gradient(135deg, #FDC830, #F37335);
+}
+
+#mostSalesRegionBox {
+    background: linear-gradient(135deg, #00C9FF, #92FE9D);
+}
+
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+        justify-content: flex-start;
+        height: auto;
+    }
+
+    .dashboard {
+        flex-wrap: wrap; /* Allow wrapping on small screens */
+        justify-content: center; /* Center items in the new row */
+        overflow-x: visible; /* Allow overflow if needed */
+    }
+
+    .box {
+        width: 90%; /* Adjust the width to fit the screen */
+        margin-bottom: 20px;
+    }
+}

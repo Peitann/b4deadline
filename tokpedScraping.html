@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    
 </head>
 <body>
     <!--=============== NAV BAR ===============-->
@@ -50,7 +51,7 @@
         <div class="container menu">
             <div class="container flex-container">
                 <div><button class="sub-container" id="gamingLaptopsBtn">Daftar Laptop Gaming</button></div>
-                <div><button class="sub-container">Visualisasi Toko</button></div>
+                <div><button class="sub-container" id="visualisasiTokoBtn">Visualisasi Toko</button></div>
             </div>
             <div id="searchWrapper" style="display: none;">
                 <i class="fa fa-search"></i>
@@ -120,10 +121,47 @@
             <button id="showAllBtn">Tampilkan Semua</button>
             <button id="showLessBtn" style="display: none;">Tampilkan Lebih Sedikit</button>
         </div>
+
+         <div class="dashboard">
+            <div class="box" id="totalDataBox" style="display: none;">
+                <h3>Total Data</h3>
+                <p id="totalData"></p>
+            </div>
+            <div class="box" id="mostPopularBrandBox" style="display: none;">
+                <h3>Most Popular Brand</h3>
+                <p id="mostPopularBrand"></p>
+            </div>
+            <div class="box" id="mostPopularStoreBox" style="display: none;">
+                <h3>Most Popular Store</h3>
+                <p id="mostPopularStore"></p>
+            </div>
+            <div class="box" id="mostSalesRegionBox" style="display: none;">
+                <h3>Region with Most Sales</h3>
+                <p id="mostSalesRegion"></p>
+        </div>
+    </div>
+        <h2 style="display: none;" id="myChartHeading">Top 10 Rating Toko Tertinggi Berdasarkan Penjualan</h2>
+        <div class="container chart">
+            <canvas id="myChart" width="800" height="400"></canvas>
+        </div>
+        <h2 style="display: none;" id="locationChartHeading">Lokasi dengan Penjualan Tertinggi</h2>
+        <div class="container chart">
+            <canvas id="locationChart" width="800" height="400"></canvas>
+        </div>
+        <h2 style="display: none;" id="brandChartHeading">Perbandingan Penjualan Merk yang Terjual</h2>
+        <div class="container chart">
+            <canvas id="brandChart"></canvas>
+        </div>
+        <h2 style="display: none;" id="authorizedChartHeading">Perbandingan Penjualan antara Toko Official dengan Toko Unofficial</h2>
+        <div class="container chart">
+            <canvas id="authorizedChart" width="800" height="400"></canvas>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="./js/tokped_tabel.js"></script>
     <script src="./js/Scrapping.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./js/chart.js"></script>
 </body>
 </html>
