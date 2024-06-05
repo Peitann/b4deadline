@@ -328,6 +328,13 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('mostPopularBrandBox').style.display = 'block';
         document.getElementById('mostPopularStoreBox').style.display = 'block';
         document.getElementById('mostSalesRegionBox').style.display = 'block';
+
+        // Tampilkan tabel
+        document.querySelector(".tablescrap").style.display = "none";
+        // Tampilkan search bar
+        document.getElementById("searchWrapper").style.display = "none";
+        // Tampilkan bar navigasi
+        document.getElementById("paginationBar").style.display = "none";
             
         // Fetch data and create charts
         fetchDataAndCreateChart();
@@ -336,6 +343,8 @@ document.addEventListener('DOMContentLoaded', function() {
         fetchDataAndCreateAuthorizedChart();
     });
 });
+
+
 /*Program untuk menampilkan dashboard*/
 fetch('tokopedia/laptop_gaming_tokopedia.json')
     .then(response => response.json())
