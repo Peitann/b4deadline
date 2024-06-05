@@ -322,6 +322,12 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('locationChartHeading').style.display = 'block';
         document.getElementById('brandChartHeading').style.display = 'block';
         document.getElementById('authorizedChartHeading').style.display = 'block';
+
+        // menampilkan dashboard
+        document.getElementById('totalDataBox').style.display = 'block';
+        document.getElementById('mostPopularBrandBox').style.display = 'block';
+        document.getElementById('mostPopularStoreBox').style.display = 'block';
+        document.getElementById('mostSalesRegionBox').style.display = 'block';
             
         // Fetch data and create charts
         fetchDataAndCreateChart();
